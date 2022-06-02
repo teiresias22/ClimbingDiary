@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		755B40A42847143F0011B294 /* Crag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A32847143F0011B294 /* Crag.swift */; };
+		755B40A6284714470011B294 /* CragInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A5284714470011B294 /* CragInformation.swift */; };
+		755B40A828474C150011B294 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A728474C150011B294 /* HomeViewModel.swift */; };
+		755B40AA284762210011B294 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A9284762210011B294 /* Observable.swift */; };
 		75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147A2844791E008E74E3 /* AppDelegate.swift */; };
 		75C5147D2844791E008E74E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147C2844791E008E74E3 /* SceneDelegate.swift */; };
 		75C5147F2844791E008E74E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147E2844791E008E74E3 /* ViewController.swift */; };
@@ -41,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		755B40A32847143F0011B294 /* Crag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crag.swift; sourceTree = "<group>"; };
+		755B40A5284714470011B294 /* CragInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CragInformation.swift; sourceTree = "<group>"; };
+		755B40A728474C150011B294 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		755B40A9284762210011B294 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		75C514772844791E008E74E3 /* ClimbingDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClimbingDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5147A2844791E008E74E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75C5147C2844791E008E74E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +166,8 @@
 		75C5149428448A07008E74E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				755B40A728474C150011B294 /* HomeViewModel.swift */,
+				755B40A9284762210011B294 /* Observable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				75C514D92845B954008E74E3 /* UserDefaults.swift */,
+				755B40A32847143F0011B294 /* Crag.swift */,
+				755B40A5284714470011B294 /* CragInformation.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -312,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75C5147F2844791E008E74E3 /* ViewController.swift in Sources */,
+				755B40A828474C150011B294 /* HomeViewModel.swift in Sources */,
 				75C514BC2844C911008E74E3 /* MyPageViewController.swift in Sources */,
 				75C514962844AC11008E74E3 /* BaseViewController.swift in Sources */,
 				75C514E328467532008E74E3 /* HomeListView.swift in Sources */,
@@ -320,7 +333,9 @@
 				75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */,
 				75C514DF28460286008E74E3 /* HomeImageView.swift in Sources */,
 				75C514C32844F87E008E74E3 /* ScheduleView.swift in Sources */,
+				755B40A6284714470011B294 /* CragInformation.swift in Sources */,
 				75C514C12844EC2C008E74E3 /* HomeView.swift in Sources */,
+				755B40A42847143F0011B294 /* Crag.swift in Sources */,
 				75C514C72844F8D9008E74E3 /* MyPageView.swift in Sources */,
 				75C514B42844C237008E74E3 /* TabBarViewController.swift in Sources */,
 				75C514C52844F898008E74E3 /* SearchView.swift in Sources */,
@@ -330,6 +345,7 @@
 				75C514B82844C84B008E74E3 /* ScheduleViewController.swift in Sources */,
 				75C514B62844C6CF008E74E3 /* HomeViewController.swift in Sources */,
 				75C514BF2844EC1C008E74E3 /* ViewRepresentable.swift in Sources */,
+				755B40AA284762210011B294 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

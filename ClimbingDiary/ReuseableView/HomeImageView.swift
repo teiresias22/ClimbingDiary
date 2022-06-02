@@ -47,6 +47,4 @@ class HomeImageView: UIView, ViewRepresentable {
             $0.bottom.equalToSuperview().inset(8)
         }
     }
-    
-    
 }

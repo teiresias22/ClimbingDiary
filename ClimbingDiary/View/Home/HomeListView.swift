@@ -36,7 +36,7 @@ class HomeListView: UIView, ViewRepresentable {
         image.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).inset(8)
             $0.leading.trailing.equalToSuperview()
-            $0.size.height.equalTo(200)
+            $0.height.equalTo(200)
         }
         
         tableView.snp.makeConstraints {
