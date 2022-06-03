@@ -17,6 +17,7 @@
 		755B40B22848CB480011B294 /* TextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40B12848CB480011B294 /* TextButtonView.swift */; };
 		755B40B4284914A70011B294 /* HomeDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40B3284914A70011B294 /* HomeDetailImageCell.swift */; };
 		755B40B6284914B20011B294 /* HomeDetailTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40B5284914B20011B294 /* HomeDetailTagCell.swift */; };
+		755B40B8284A72170011B294 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40B7284A72170011B294 /* Enums.swift */; };
 		75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147A2844791E008E74E3 /* AppDelegate.swift */; };
 		75C5147D2844791E008E74E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147C2844791E008E74E3 /* SceneDelegate.swift */; };
 		75C5147F2844791E008E74E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5147E2844791E008E74E3 /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		755B40B12848CB480011B294 /* TextButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonView.swift; sourceTree = "<group>"; };
 		755B40B3284914A70011B294 /* HomeDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailImageCell.swift; sourceTree = "<group>"; };
 		755B40B5284914B20011B294 /* HomeDetailTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailTagCell.swift; sourceTree = "<group>"; };
+		755B40B7284A72170011B294 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		75C514772844791E008E74E3 /* ClimbingDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClimbingDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C5147A2844791E008E74E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75C5147C2844791E008E74E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				75C514D92845B954008E74E3 /* UserDefaults.swift */,
 				755B40A32847143F0011B294 /* Crag.swift */,
 				755B40A5284714470011B294 /* CragInformation.swift */,
+				755B40B7284A72170011B294 /* Enums.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				75C514E328467532008E74E3 /* HomeListView.swift in Sources */,
 				75C514BA2844C8AC008E74E3 /* SearchViewController.swift in Sources */,
 				755B40AC2848BE710011B294 /* HomeDetailView.swift in Sources */,
+				755B40B8284A72170011B294 /* Enums.swift in Sources */,
 				75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */,
 				75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */,
 				75C514DF28460286008E74E3 /* HomeImageView.swift in Sources */,

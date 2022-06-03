@@ -23,25 +23,28 @@ class HomeViewController: BaseViewController {
     }
     
     func setView(){
-        setUpViews(mainView.mainSectionView.label, mainView.mainSectionView.image, "이벤트 암장", .systemCyan)
-        setUpViews(mainView.firstSubView.label, mainView.firstSubView.image, "인기 암장", .systemRed)
-        setUpViews(mainView.secondSubView.label, mainView.secondSubView.image, "신규 암장", .systemBlue)
-        setUpViews(mainView.therdSubView.label, mainView.therdSubView.image, "추천 암장", .systemMint)
-        setUpViews(mainView.forthSubView.label, mainView.forthSubView.image, "신규 세팅 암장", .systemPink)
+        setUpViews(mainView.mainSectionView.label, mainView.mainSectionView.image, HomeViews.mainSection)
+        setUpViews(mainView.firstSubView.label, mainView.firstSubView.image, HomeViews.firstView)
+        setUpViews(mainView.secondSubView.label, mainView.secondSubView.image, HomeViews.secondView)
+        setUpViews(mainView.therdSubView.label, mainView.therdSubView.image, HomeViews.therdView)
+        setUpViews(mainView.forthSubView.label, mainView.forthSubView.image, HomeViews.forthView)
     }
     
-    func setUpViews(_ targetLabel: UILabel, _ targetView: UIImageView, _ name: String, _ image: UIColor) {
-        targetLabel.text = name
-        targetView.backgroundColor = image
-        addTargetViewTapped(targetView, targetLabel, image)
+    func setUpViews(_ targetLabel: UILabel, _ targetView: UIImageView, _ target: HomeViews) {
+        targetLabel.text = target.text
+        targetView.backgroundColor = target.color
+        addTargetViewTapped(targetView, targetLabel, target)
     }
     
-    func addTargetViewTapped(_ targetView: UIImageView, _ targetLabel: UILabel, _ targetImage: UIColor ) {
+    func addTargetViewTapped(_ targetView: UIImageView, _ targetLabel: UILabel, _ target : HomeViews) {
         let viewTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         targetView.isUserInteractionEnabled = true
         targetView.addGestureRecognizer(viewTap)
-        viewModel.titleName.value = targetLabel.text ?? ""
-        viewModel.titleImage = targetImage 
+        
+        //뷰 모델에 담는게 돌아갈때마다 담기 때문에 제일 마지막 변수가 들어감. action에 넣어줘야 할 것 같은데 좀 더 알아봐야 할듯
+        //tag를 사용하는것도 고려중
+        viewModel.titleName.value = target.text
+        viewModel.titleImage = target.color
     }
     
     @objc func viewTapped() {

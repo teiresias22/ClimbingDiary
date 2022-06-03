@@ -59,6 +59,4 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             
         }
     }
-    
-    
 }

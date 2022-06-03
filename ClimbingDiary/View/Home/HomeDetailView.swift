@@ -48,11 +48,16 @@ class HomeDetailView: UIView, ViewRepresentable {
     
     let tagCollectionView:  UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = .systemPink
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        view.backgroundColor = .systemPink
         
-        return cv
+        if let flowLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+        
+        return view
     }()
     
     let bottomView = UIView().then {
