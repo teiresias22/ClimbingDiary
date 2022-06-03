@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class HomeViewController: BaseViewController {
     let mainView = HomeView()
