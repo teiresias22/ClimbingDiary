@@ -44,11 +44,16 @@ extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.subTitleLabel.text = target.introduce
         cell.rightTopLabel.text = target.name
         cell.rightBottomLabel.text = target.name
-        cell.backgroundColor = .gray
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = HomeDetailViewController()
+        vc.viewModel = viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

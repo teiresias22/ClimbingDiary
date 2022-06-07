@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 struct crag {
     let image: [String]
@@ -24,4 +25,5 @@ struct crag {
     let price: String
     let reservation: String
     let site : String
+    let grade : [UIColor]
 }

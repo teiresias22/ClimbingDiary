@@ -37,19 +37,24 @@ class HomeViewController: BaseViewController {
     }
     
     func addTargetViewTapped(_ targetView: UIImageView, _ targetLabel: UILabel, _ target : HomeViews) {
-        let viewTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let viewTap = CustomTapGestureRecognizer(target: self, action: #selector(viewTapped(sender:)))
+        viewTap.customNameValue = targetLabel.text
+        viewTap.customColorValue = targetView.backgroundColor
         targetView.isUserInteractionEnabled = true
         targetView.addGestureRecognizer(viewTap)
-        
-        //뷰 모델에 담는게 돌아갈때마다 담기 때문에 제일 마지막 변수가 들어감. action에 넣어줘야 할 것 같은데 좀 더 알아봐야 할듯
-        //tag를 사용하는것도 고려중
-        viewModel.titleName.value = target.text
-        viewModel.titleImage = target.color
     }
     
-    @objc func viewTapped() {
+    @objc func viewTapped(sender: CustomTapGestureRecognizer) {
+        viewModel.titleName.value = sender.customNameValue ?? "알수 없는 분류"
+        viewModel.titleImage = sender.customColorValue ?? .gray
+        
         let vc = HomeListViewController()
         vc.viewModel = viewModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var customNameValue: String?
+    var customColorValue: UIColor?
 }
