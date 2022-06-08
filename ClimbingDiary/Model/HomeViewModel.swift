@@ -10,7 +10,9 @@ import UIKit
 
 class HomeViewModel {
     
-    var titleName: Observable<String> = Observable("11")
-    var titleImage: UIColor = .black
+    var homeListTitle: Observable<String> = Observable("@@@@@@@@")
+    var homeListImage: UIColor = .black
+    
+    var homeDetailNo = CragInformation.init().cragList[0]
     
 }

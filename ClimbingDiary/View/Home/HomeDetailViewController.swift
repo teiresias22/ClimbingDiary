@@ -9,6 +9,7 @@ import UIKit
 
 class HomeDetailViewController: BaseViewController {
     let mainView = HomeDetailView()
+    var viewModel = HomeViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -34,19 +35,21 @@ class HomeDetailViewController: BaseViewController {
 extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.topCollectionView {
-            return 1
+            return viewModel.homeDetailNo.image.count
         } else {
-            return 1
+            return viewModel.homeDetailNo.tag.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mainView.topCollectionView {
             guard let item = mainView.topCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailImageCell.identifier, for: indexPath) as? HomeDetailImageCell else { return UICollectionViewCell() }
+            item.image.backgroundColor = viewModel.homeDetailNo.image[indexPath.row]
             
             return item
         } else {
             guard let item = mainView.tagCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
+            item.label.text = viewModel.homeDetailNo.tag[indexPath.row]
             
             return item
         }
@@ -54,9 +57,9 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == mainView.topCollectionView {
-            
+            print(#function)
         } else {
-            
+            print(#function)
         }
     }
 }

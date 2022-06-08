@@ -10,7 +10,7 @@ import CoreLocation
 import UIKit
 
 struct crag {
-    let image: [String]
+    let image: [UIColor]
     
     let name: String
     let introduce: String

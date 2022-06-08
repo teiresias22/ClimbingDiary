@@ -17,8 +17,8 @@ class HomeListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.titleName.value
-        mainView.image.backgroundColor = viewModel.titleImage
+        title = viewModel.homeListTitle.value
+        mainView.image.backgroundColor = viewModel.homeListImage
         
         setView()
     }
@@ -33,12 +33,12 @@ class HomeListViewController: BaseViewController {
 
 extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CragInformation.init().mapAnnotations.count
+        return CragInformation.init().cragList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeListCell.identifier, for: indexPath) as? HomeListCell else { return UITableViewCell() }
-        let target = CragInformation.init().mapAnnotations[indexPath.row]
+        let target = CragInformation.init().cragList[indexPath.row]
         
         cell.titleLabel.text = target.name
         cell.subTitleLabel.text = target.introduce
@@ -52,6 +52,7 @@ extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.homeDetailNo = CragInformation.init().cragList[indexPath.row]
         let vc = HomeDetailViewController()
         vc.viewModel = viewModel
         self.navigationController?.pushViewController(vc, animated: true)
