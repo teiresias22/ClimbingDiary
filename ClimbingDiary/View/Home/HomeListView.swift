@@ -10,7 +10,6 @@ import SnapKit
 import Then
 
 class HomeListView: UIView, ViewRepresentable {
-    
     let image = UIImageView().then {
         $0.backgroundColor = .systemGray
     }

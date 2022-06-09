@@ -11,6 +11,9 @@ class HomeDetailViewController: BaseViewController {
     let mainView = HomeDetailView()
     var viewModel = HomeViewModel()
     
+    var timer : Timer?
+    var cuttentCellIndex = 0
+    
     override func loadView() {
         self.view = mainView
     }
@@ -30,9 +33,19 @@ class HomeDetailViewController: BaseViewController {
         mainView.tagCollectionView.dataSource = self
         mainView.tagCollectionView.register(HomeDetailTagCell.self, forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
     }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+    }
+    
+    @objc func moveToNextIndex() {
+        cuttentCellIndex += 1
+        mainView.topCollectionView.scrollToItem(at: IndexPath(item: cuttentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+    }
 }
 
 extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.topCollectionView {
             return viewModel.homeDetailNo.image.count
@@ -53,6 +66,18 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             
             return item
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) -> CGSize {
+        if collectionView == mainView.topCollectionView {
+            return CGSize(width: mainView.topCollectionView.frame.width, height: mainView.topCollectionView.frame.height)
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

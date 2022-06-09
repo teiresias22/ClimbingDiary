@@ -10,7 +10,7 @@ import SnapKit
 import Then
 
 class HomeDetailView: UIView, ViewRepresentable {
-    let topCollectionView: UICollectionView = {
+    let imageSliderView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -22,20 +22,25 @@ class HomeDetailView: UIView, ViewRepresentable {
         
         return view
     }()
+    
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = .gray
+        $0.showsVerticalScrollIndicator = false
+    }
        
     let topView = UIView().then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .systemGray2
     }
     
-    let topTitleLabel = UILabel().then {
+    let topViewTitle = UILabel().then {
         $0.text = "@@@@@@@@"
     }
     
-    let topSubTitleLabel = UILabel().then {
+    let topViewSubTitle = UILabel().then {
         $0.text = "@@@@"
     }
     
-    let midleStackView = UIStackView().then {
+    let buttonsStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .fill
         $0.distribution = .fill
@@ -60,15 +65,15 @@ class HomeDetailView: UIView, ViewRepresentable {
         return view
     }()
     
-    let bottomView = UIView().then {
+    let moreInfoView = UIView().then {
         $0.backgroundColor = .gray
     }
     
-    let bottomTitleLabel = UILabel().then {
+    let moreInfoViewTopLabel = UILabel().then {
         $0.text = "@@@@@@@"
     }
     
-    let bottomSubLabel = UILabel().then {
+    let moreInfoViewBottomLabel = UILabel().then {
         $0.text = "@@@@@@@"
     }
     
@@ -81,19 +86,19 @@ class HomeDetailView: UIView, ViewRepresentable {
     
     let reservationButton = UIButton().then {
         $0.tintColor = .white
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .systemGray
         $0.layer.cornerRadius = 8
     }
     
     let shareButton = UIButton().then {
         $0.tintColor = .white
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .systemGray2
         $0.layer.cornerRadius = 8
     }
     
     let siteButton = UIButton().then {
         $0.tintColor = .white
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .systemGray3
         $0.layer.cornerRadius = 8
     }
     
@@ -108,113 +113,93 @@ class HomeDetailView: UIView, ViewRepresentable {
     }
 
     func setupView() {
-        addSubview(topCollectionView)
+        addSubview(imageSliderView)
+        addSubview(scrollView)
+        scrollView.addSubview(topView)
+        topView.addSubview(topViewTitle)
+        topView.addSubview(topViewSubTitle)
         
-        addSubview(topView)
-        topView.addSubview(topTitleLabel)
-        topView.addSubview(topSubTitleLabel)
+        scrollView.addSubview(buttonsStackView)
+        buttonsStackView.addArrangedSubview(locationButton)
+        buttonsStackView.addArrangedSubview(sectorButton)
+        buttonsStackView.addArrangedSubview(openHourButton)
+        buttonsStackView.addArrangedSubview(callButton)
         
-        addSubview(midleStackView)
-        midleStackView.addArrangedSubview(locationButton)
-        midleStackView.addArrangedSubview(sectorButton)
-        midleStackView.addArrangedSubview(openHourButton)
-        midleStackView.addArrangedSubview(callButton)
+        scrollView.addSubview(tagCollectionView)
         
-        addSubview(tagCollectionView)
+        scrollView.addSubview(moreInfoView)
+        moreInfoView.addSubview(moreInfoViewTopLabel)
+        moreInfoView.addSubview(moreInfoViewBottomLabel)
         
-        addSubview(bottomView)
-        bottomView.addSubview(bottomTitleLabel)
-        bottomView.addSubview(bottomSubLabel)
-        
-        addSubview(bottomStackView)
+        scrollView.addSubview(bottomStackView)
         bottomStackView.addArrangedSubview(reservationButton)
         bottomStackView.addArrangedSubview(shareButton)
         bottomStackView.addArrangedSubview(siteButton)
     }
     
     func setupConstraints() {
-        topCollectionView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).inset(8)
+        imageSliderView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(200)
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(imageSliderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+        
         topView.snp.makeConstraints {
-            $0.top.equalTo(topCollectionView.snp.bottom).offset(-16)
-            $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(80)
-        }
-        
-        topTitleLabel.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(30)
-        }
-        
-        topSubTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(topTitleLabel.snp.top).offset(-10)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        midleStackView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(-8)
-            $0.leading.trailing.equalToSuperview().inset(40)
-            $0.height.equalTo(60)
-        }
-        
-        locationButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
-        
-        sectorButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
-        
-        openHourButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
-        
-        callButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
-        
-        tagCollectionView.snp.makeConstraints {
-            $0.top.equalTo(midleStackView.snp.bottom).offset(-8)
-            $0.width.equalTo(midleStackView.snp.width)
-            $0.centerY.equalToSuperview()
+            $0.top.equalTo(scrollView.snp.top).inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(120)
         }
         
-        bottomView.snp.makeConstraints {
-            $0.top.equalTo(tagCollectionView.snp.bottom).offset(-8)
-            $0.width.equalTo(midleStackView.snp.width)
-            $0.centerY.equalToSuperview()
-            $0.height.equalTo(72)
-        }
-        
-        bottomTitleLabel.snp.makeConstraints {
+        topViewTitle.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(24)
+            $0.height.equalTo(32)
         }
         
-        bottomSubLabel.snp.makeConstraints {
+        topViewSubTitle.snp.makeConstraints {
+            $0.top.equalTo(topViewTitle.snp.bottom).offset(-8)
+            $0.leading.trailing.bottom.equalToSuperview().inset(20)
+        }
+        
+        buttonsStackView.snp.makeConstraints {
+            $0.top.equalTo(topView.snp.bottom).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(80)
+        }
+        
+        tagCollectionView.snp.makeConstraints {
+            $0.top.equalTo(buttonsStackView.snp.bottom).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(120)
+        }
+        
+        moreInfoView.snp.makeConstraints {
+            $0.top.equalTo(tagCollectionView.snp.bottom).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(80)
+        }
+        
+        moreInfoViewTopLabel.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(28)
+        }
+        
+        moreInfoViewBottomLabel.snp.makeConstraints {
+            $0.top.equalTo(moreInfoViewTopLabel.snp.bottom).offset(-8)
             $0.leading.trailing.bottom.equalToSuperview().inset(8)
-            $0.height.equalTo(24)
         }
         
         bottomStackView.snp.makeConstraints {
-            $0.top.equalTo(bottomView.snp.bottom).offset(-8)
-            $0.width.equalTo(midleStackView.snp.width)
-            $0.centerY.equalToSuperview()
-            $0.height.equalTo(40)
+            $0.top.equalTo(moreInfoView.snp.bottom).offset(-20)
+            $0.leading.trailing.equalToSuperview().inset(40)
         }
         
-        shareButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
         
-        siteButton.snp.makeConstraints {
-            $0.width.equalTo(60)
-        }
     }
 }
 

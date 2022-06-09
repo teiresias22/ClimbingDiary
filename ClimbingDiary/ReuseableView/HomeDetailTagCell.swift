@@ -13,7 +13,7 @@ class HomeDetailTagCell: UICollectionViewCell{
     static let identifier = "HomeDetailTagCell"
     
     let label = UILabel().then {
-        $0.textColor = .white
+        $0.text = "@@@@@@"
     }
     
     required init?(coder: NSCoder) {
