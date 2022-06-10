@@ -14,10 +14,21 @@ class HomeDetailTagCell: UICollectionViewCell{
     
     let label = UILabel().then {
         $0.text = "@@@@@@"
+        $0.layer.cornerRadius = 8
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.black.cgColor
+        $0.backgroundColor = .systemGray6
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
     }
     
     func setViews() {

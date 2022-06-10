@@ -21,14 +21,17 @@ class HomeDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setCollectionView()
+        setImageSliderViewSet()
+        setTagCollectionViewSet()
     }
     
-    func setCollectionView() {
-        mainView.topCollectionView.delegate = self
-        mainView.topCollectionView.dataSource = self
-        mainView.topCollectionView.register(HomeDetailImageCell.self, forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
-        
+    func setImageSliderViewSet() {
+        mainView.imageSliderView.delegate = self
+        mainView.imageSliderView.dataSource = self
+        mainView.imageSliderView.register(HomeDetailImageCell.self, forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
+    }
+    
+    func setTagCollectionViewSet() {
         mainView.tagCollectionView.delegate = self
         mainView.tagCollectionView.dataSource = self
         mainView.tagCollectionView.register(HomeDetailTagCell.self, forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
@@ -40,14 +43,14 @@ class HomeDetailViewController: BaseViewController {
     
     @objc func moveToNextIndex() {
         cuttentCellIndex += 1
-        mainView.topCollectionView.scrollToItem(at: IndexPath(item: cuttentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        mainView.imageSliderView.scrollToItem(at: IndexPath(item: cuttentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
     }
 }
 
 extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == mainView.topCollectionView {
+        if collectionView == mainView.imageSliderView {
             return viewModel.homeDetailNo.image.count
         } else {
             return viewModel.homeDetailNo.tag.count
@@ -55,8 +58,8 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == mainView.topCollectionView {
-            guard let item = mainView.topCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailImageCell.identifier, for: indexPath) as? HomeDetailImageCell else { return UICollectionViewCell() }
+        if collectionView == mainView.imageSliderView {
+            guard let item = mainView.imageSliderView.dequeueReusableCell(withReuseIdentifier: HomeDetailImageCell.identifier, for: indexPath) as? HomeDetailImageCell else { return UICollectionViewCell() }
             item.image.backgroundColor = viewModel.homeDetailNo.image[indexPath.row]
             
             return item
@@ -69,8 +72,8 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) -> CGSize {
-        if collectionView == mainView.topCollectionView {
-            return CGSize(width: mainView.topCollectionView.frame.width, height: mainView.topCollectionView.frame.height)
+        if collectionView == mainView.imageSliderView {
+            return CGSize(width: mainView.imageSliderView.frame.width, height: mainView.imageSliderView.frame.height)
         } else {
             return CGSize(width: 0, height: 0)
         }
@@ -81,7 +84,7 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == mainView.topCollectionView {
+        if collectionView == mainView.imageSliderView {
             print(#function)
         } else {
             print(#function)

@@ -197,9 +197,8 @@ class HomeDetailView: UIView, ViewRepresentable {
         bottomStackView.snp.makeConstraints {
             $0.top.equalTo(moreInfoView.snp.bottom).offset(-20)
             $0.leading.trailing.equalToSuperview().inset(40)
+            $0.bottom.equalToSuperview().inset(20)
         }
-        
-        
     }
 }
 
