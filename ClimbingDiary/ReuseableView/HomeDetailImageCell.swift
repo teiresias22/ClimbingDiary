@@ -17,6 +17,12 @@ class HomeDetailImageCell: UICollectionViewCell{
         $0.backgroundColor = .gray
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setViews()
+        setConstraints()
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

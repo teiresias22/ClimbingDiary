@@ -11,39 +11,46 @@ import Then
 
 class HomeDetailView: UIView, ViewRepresentable {
     let imageSliderView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
-        
-        if let flowLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        }
-        
-        return view
-    }()
+         let layout = UICollectionViewFlowLayout()
+         layout.minimumLineSpacing = 0
+         layout.minimumInteritemSpacing = 0
+         layout.scrollDirection = .horizontal
+         
+         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+         view.isPagingEnabled = true
+         view.showsHorizontalScrollIndicator = false
+         return view
+     }()
+    
+    let progressView = UIProgressView().then {
+        $0.trackTintColor = .gray
+        $0.progressTintColor = .white
+    }
     
     let scrollView = UIScrollView().then {
-        $0.backgroundColor = .gray
         $0.showsVerticalScrollIndicator = false
     }
-       
-    let topView = UIView().then {
-        $0.backgroundColor = .systemGray2
+    
+    let contentView = UIView().then {
+        $0.backgroundColor = .white
     }
+    
+    let topView = UIView()
     
     let topViewTitle = UILabel().then {
         $0.text = "@@@@@@@@"
+        $0.font = .systemFont(ofSize: 24)
     }
     
     let topViewSubTitle = UILabel().then {
         $0.text = "@@@@"
+        $0.numberOfLines = 0
     }
     
     let buttonsStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .fill
-        $0.distribution = .fill
+        $0.distribution = .fillEqually
     }
     
     let locationButton = ImageButtonView()
@@ -56,7 +63,9 @@ class HomeDetailView: UIView, ViewRepresentable {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
-        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 8
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
         
         if let flowLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -65,9 +74,7 @@ class HomeDetailView: UIView, ViewRepresentable {
         return view
     }()
     
-    let moreInfoView = UIView().then {
-        $0.backgroundColor = .gray
-    }
+    let moreInfoView = UIView()
     
     let moreInfoViewTopLabel = UILabel().then {
         $0.text = "@@@@@@@"
@@ -114,24 +121,26 @@ class HomeDetailView: UIView, ViewRepresentable {
 
     func setupView() {
         addSubview(imageSliderView)
+        addSubview(progressView)
         addSubview(scrollView)
-        scrollView.addSubview(topView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(topView)
         topView.addSubview(topViewTitle)
         topView.addSubview(topViewSubTitle)
         
-        scrollView.addSubview(buttonsStackView)
+        contentView.addSubview(buttonsStackView)
         buttonsStackView.addArrangedSubview(locationButton)
         buttonsStackView.addArrangedSubview(sectorButton)
         buttonsStackView.addArrangedSubview(openHourButton)
         buttonsStackView.addArrangedSubview(callButton)
         
-        scrollView.addSubview(tagCollectionView)
+        contentView.addSubview(tagCollectionView)
         
-        scrollView.addSubview(moreInfoView)
+        contentView.addSubview(moreInfoView)
         moreInfoView.addSubview(moreInfoViewTopLabel)
         moreInfoView.addSubview(moreInfoViewBottomLabel)
         
-        scrollView.addSubview(bottomStackView)
+        contentView.addSubview(bottomStackView)
         bottomStackView.addArrangedSubview(reservationButton)
         bottomStackView.addArrangedSubview(shareButton)
         bottomStackView.addArrangedSubview(siteButton)
@@ -144,42 +153,56 @@ class HomeDetailView: UIView, ViewRepresentable {
             $0.height.equalTo(200)
         }
         
+        progressView.snp.makeConstraints {
+            $0.bottom.equalTo(imageSliderView.snp.bottom).offset(-20)
+            $0.leading.equalTo(imageSliderView.snp.leading).inset(20)
+            $0.trailing.equalTo(imageSliderView.snp.trailing).inset(20)
+            $0.height.equalTo(2)
+        }
+        
         scrollView.snp.makeConstraints {
             $0.top.equalTo(imageSliderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
+            $0.width.equalTo(imageSliderView.snp.width)
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
         
+        contentView.snp.makeConstraints {
+            $0.top.equalTo(scrollView.snp.top)
+            $0.leading.equalTo(scrollView.snp.leading)
+            $0.trailing.equalTo(scrollView.snp.trailing)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.bottom.equalTo(scrollView.snp.bottom)
+        }
+        
         topView.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.top).inset(20)
+            $0.top.equalTo(contentView.snp.top).inset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(120)
         }
         
         topViewTitle.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(8)
-            $0.height.equalTo(32)
         }
         
         topViewSubTitle.snp.makeConstraints {
-            $0.top.equalTo(topViewTitle.snp.bottom).offset(-8)
+            $0.top.equalTo(topViewTitle.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
         
         buttonsStackView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(-20)
+            $0.top.equalTo(topView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
-            $0.height.equalTo(80)
+            $0.height.equalTo(100)
         }
         
         tagCollectionView.snp.makeConstraints {
-            $0.top.equalTo(buttonsStackView.snp.bottom).offset(-20)
+            $0.top.equalTo(buttonsStackView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(120)
         }
         
         moreInfoView.snp.makeConstraints {
-            $0.top.equalTo(tagCollectionView.snp.bottom).offset(-20)
+            $0.top.equalTo(tagCollectionView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(80)
         }
@@ -190,12 +213,12 @@ class HomeDetailView: UIView, ViewRepresentable {
         }
         
         moreInfoViewBottomLabel.snp.makeConstraints {
-            $0.top.equalTo(moreInfoViewTopLabel.snp.bottom).offset(-8)
+            $0.top.equalTo(moreInfoViewTopLabel.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview().inset(8)
         }
         
         bottomStackView.snp.makeConstraints {
-            $0.top.equalTo(moreInfoView.snp.bottom).offset(-20)
+            $0.top.equalTo(moreInfoView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.bottom.equalToSuperview().inset(20)
         }

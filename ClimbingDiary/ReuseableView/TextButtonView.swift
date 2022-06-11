@@ -14,6 +14,7 @@ class TextButtonView: UIView, ViewRepresentable {
         $0.textColor = .black
         $0.adjustsFontSizeToFitWidth = true
         $0.textAlignment = .center
+        $0.backgroundColor = .systemGray6
     }
     
     let label = UILabel().then {
