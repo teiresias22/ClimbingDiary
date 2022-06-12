@@ -11,13 +11,13 @@ import Then
 
 class ImageButtonView: UIView, ViewRepresentable {
     let image = UIImageView().then {
-        $0.backgroundColor = .gray
-        $0.layer.cornerRadius = 8
+        $0.tintColor = .black
     }
     
     let label = UILabel().then {
         $0.textColor = .gray
         $0.text = "@@@@@@"
+        $0.textAlignment = .center
     }
     
     override init(frame: CGRect) {
@@ -36,16 +36,15 @@ class ImageButtonView: UIView, ViewRepresentable {
     }
     
     func setupConstraints() {
-        image.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.trailing.equalToSuperview().inset(4)
-            $0.bottom.equalTo(label.snp.top).offset(4)
-        }
-        
         label.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(8)
             $0.bottom.equalToSuperview().inset(4)
             $0.height.equalTo(20)
+        }
+        
+        image.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(label.snp.top).offset(-4)
         }
     }
 }

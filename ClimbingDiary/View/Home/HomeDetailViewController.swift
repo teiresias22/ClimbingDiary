@@ -23,12 +23,13 @@ class HomeDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         setViewLabels()
+        setButtonStack()
         
         progressSet()
         activateTimer()
         
-        setImageSliderViewSet()
-        setTagCollectionViewSet()
+        setImageSliderView()
+        setTagCollectionView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,16 +89,52 @@ class HomeDetailViewController: BaseViewController {
                                           animated: false)
     }
     
-    func setImageSliderViewSet() {
+    func setImageSliderView() {
         mainView.imageSliderView.delegate = self
         mainView.imageSliderView.dataSource = self
         mainView.imageSliderView.register(HomeDetailImageCell.self, forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
     }
     
-    func setTagCollectionViewSet() {
+    func setTagCollectionView() {
         mainView.tagCollectionView.delegate = self
         mainView.tagCollectionView.dataSource = self
         mainView.tagCollectionView.register(HomeDetailTagCell.self, forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
+    }
+    
+    func setButtonStack() {
+        mainView.sectorButton.text.text = viewModel.homeDetailNo.numOfSector
+        mainView.openHourButton.label.text = nowDate()
+        mainView.openHourButton.text.text = viewModel.homeDetailNo.openingHours[setOpeningHours()]
+    }
+    
+    func nowDate() -> String {
+        let nowDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko")
+        dateFormatter.dateFormat = "E요일"
+        let todayDate = dateFormatter.string(from: nowDate)
+        
+        return todayDate
+    }
+    
+    func setOpeningHours() -> Int {
+        let nowDate = nowDate()
+        var index = 6
+        
+        if nowDate == "일요일" {
+            index = 0
+        } else if nowDate == "월요일 " {
+            index = 1
+        } else if nowDate == "화요일" {
+            index = 2
+        } else if nowDate == "수요일" {
+            index = 3
+        } else if nowDate == "목요일" {
+            index = 4
+        } else if nowDate == "금요일" {
+            index = 5
+        }
+        return index
     }
     
     func startTimer() {

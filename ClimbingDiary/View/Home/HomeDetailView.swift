@@ -48,15 +48,27 @@ class HomeDetailView: UIView, ViewRepresentable {
     }
     
     let buttonsStackView = UIStackView().then {
+        $0.spacing = 8
         $0.axis = .horizontal
         $0.alignment = .fill
         $0.distribution = .fillEqually
     }
     
-    let locationButton = ImageButtonView()
-    let sectorButton = TextButtonView()
+    let locationButton = ImageButtonView().then {
+        $0.image.image = UIImage(systemName: "mappin.circle")
+        $0.label.text = "위치"
+    }
+
+    let sectorButton = TextButtonView().then {
+        $0.label.text = "섹터"
+    }
+    
     let openHourButton = TextButtonView()
-    let callButton = ImageButtonView()
+    
+    let callButton = ImageButtonView().then {
+        $0.image.image = UIImage(systemName: "phone.circle")
+        $0.label.text = "전화"
+    }
     
     let tagCollectionView:  UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -92,18 +104,21 @@ class HomeDetailView: UIView, ViewRepresentable {
     }
     
     let reservationButton = UIButton().then {
+        $0.setTitle("예약", for: .normal)
         $0.tintColor = .white
         $0.backgroundColor = .systemGray
         $0.layer.cornerRadius = 8
     }
     
     let shareButton = UIButton().then {
+        $0.setTitle("공유", for: .normal)
         $0.tintColor = .white
         $0.backgroundColor = .systemGray2
         $0.layer.cornerRadius = 8
     }
     
     let siteButton = UIButton().then {
+        $0.setTitle("사이트", for: .normal)
         $0.tintColor = .white
         $0.backgroundColor = .systemGray3
         $0.layer.cornerRadius = 8
@@ -221,6 +236,14 @@ class HomeDetailView: UIView, ViewRepresentable {
             $0.top.equalTo(moreInfoView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.bottom.equalToSuperview().inset(20)
+        }
+        
+        shareButton.snp.makeConstraints {
+            $0.width.equalTo(64)
+        }
+        
+        siteButton.snp.makeConstraints {
+            $0.width.equalTo(shareButton.snp.width)
         }
     }
 }

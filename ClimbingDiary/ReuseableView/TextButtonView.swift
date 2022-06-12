@@ -12,14 +12,15 @@ import Then
 class TextButtonView: UIView, ViewRepresentable {
     let text = UILabel().then {
         $0.textColor = .black
-        $0.adjustsFontSizeToFitWidth = true
         $0.textAlignment = .center
-        $0.backgroundColor = .systemGray6
+        $0.font = .systemFont(ofSize: 56)
+        $0.adjustsFontSizeToFitWidth = true
     }
     
     let label = UILabel().then {
         $0.textColor = .gray
         $0.text = "@@@@@@"
+        $0.textAlignment = .center
     }
     
     override init(frame: CGRect) {
@@ -38,17 +39,15 @@ class TextButtonView: UIView, ViewRepresentable {
     }
     
     func setupConstraints() {
-        text.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.trailing.equalToSuperview().inset(4)
-            $0.bottom.equalTo(label.snp.top).offset(4)
-        }
-        
         label.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(8)
             $0.bottom.equalToSuperview().inset(4)
             $0.height.equalTo(20)
         }
         
+        text.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(label.snp.top).offset(-4)
+        }
     }
 }

@@ -44,6 +44,8 @@ extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.subTitleLabel.text = target.introduce
         cell.rightTopLabel.text = target.name
         cell.rightBottomLabel.text = target.name
+        
+        cell.selectionStyle = .none
         return cell
     }
     
