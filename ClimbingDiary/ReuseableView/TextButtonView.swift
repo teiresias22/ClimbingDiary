@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class TextButtonView: UIView, ViewRepresentable {
+final class TextButtonView: UIView, ViewRepresentable {
     let text = UILabel().then {
         $0.textColor = .black
         $0.textAlignment = .center

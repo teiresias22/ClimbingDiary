@@ -23,7 +23,7 @@ class HomeListViewController: BaseViewController {
         setView()
     }
     
-    func setView() {
+    private func setView() {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.register(HomeListCell.self, forCellReuseIdentifier: HomeListCell.identifier)

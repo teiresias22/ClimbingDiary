@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class HomeListCell: UITableViewCell {
+final class HomeListCell: UITableViewCell {
     static let identifier = "HomeListCell"
     
     let titleLabel = UILabel().then {

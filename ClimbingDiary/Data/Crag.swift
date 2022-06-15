@@ -18,8 +18,9 @@ struct crag {
     let latitude: CLLocationDegrees
     let longitudr: CLLocationDegrees
     let numOfSector: String
+    let changeOfSector: String
     let openingHours: [String]
-    let callNumber: String
+    let callNumber: Int
     let tag: [String]
     let parking: String
     let price: String

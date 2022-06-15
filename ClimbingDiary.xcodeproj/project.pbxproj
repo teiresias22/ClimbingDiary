@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		753B21652855BC2C00C922EF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B21642855BC2C00C922EF /* OpenGLES.framework */; };
 		753B21672855BC3800C922EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B21662855BC3800C922EF /* SystemConfiguration.framework */; };
 		753B21692855BC4700C922EF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B21682855BC4700C922EF /* CoreLocation.framework */; };
 		753B216B2855BC7A00C922EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B216A2855BC7A00C922EF /* QuartzCore.framework */; };
@@ -42,6 +41,7 @@
 		753B21B3285603F200C922EF /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 753B2197285603F200C922EF /* daum_th_line.png */; };
 		753B21B4285603F200C922EF /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 753B2198285603F200C922EF /* map_pin_shadow.png */; };
 		753B21B5285603F200C922EF /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B2199285603F200C922EF /* DaumMap.framework */; };
+		753B21B9285639AA00C922EF /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B21B8285639AA00C922EF /* Metal.framework */; };
 		753C382E285517E400EEC8EF /* HomeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382D285517E400EEC8EF /* HomeMapView.swift */; };
 		753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382F285517ED00EEC8EF /* HomeMapViewController.swift */; };
 		755B40A42847143F0011B294 /* Crag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A32847143F0011B294 /* Crag.swift */; };
@@ -133,6 +133,7 @@
 		753B2197285603F200C922EF /* daum_th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_th_line.png; sourceTree = "<group>"; };
 		753B2198285603F200C922EF /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
 		753B2199285603F200C922EF /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
+		753B21B8285639AA00C922EF /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		753C382D285517E400EEC8EF /* HomeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapView.swift; sourceTree = "<group>"; };
 		753C382F285517ED00EEC8EF /* HomeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewController.swift; sourceTree = "<group>"; };
 		755B40A32847143F0011B294 /* Crag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crag.swift; sourceTree = "<group>"; };
@@ -188,8 +189,8 @@
 				75C514D52845B6C3008E74E3 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				753B21B5285603F200C922EF /* DaumMap.framework in Frameworks */,
 				75C5149E2844B6AE008E74E3 /* Then in Frameworks */,
-				753B21652855BC2C00C922EF /* OpenGLES.framework in Frameworks */,
 				753B216E2855BCD500C922EF /* libc++.tbd in Frameworks */,
+				753B21B9285639AA00C922EF /* Metal.framework in Frameworks */,
 				753B21672855BC3800C922EF /* SystemConfiguration.framework in Frameworks */,
 				75C514A12844B787008E74E3 /* Realm in Frameworks */,
 				75C514D12845B6C3008E74E3 /* FirebaseCrashlytics in Frameworks */,
@@ -204,6 +205,7 @@
 		753B21632855BC2C00C922EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				753B21B8285639AA00C922EF /* Metal.framework */,
 				753B21702855BCF200C922EF /* libsqlite3.tbd */,
 				753B216D2855BCC500C922EF /* libxml2.tbd */,
 				753B216C2855BCB000C922EF /* libc++.tbd */,
@@ -733,7 +735,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.edu.joonhwan.ClimbingDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/joonhwanjeon/Downloads/SSAC/Swift/ClimbingDiary/BrideHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/joonhwanjeon/Downloads/SSAC/Swift/ClimbingDiary/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -767,7 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.edu.joonhwan.ClimbingDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/joonhwanjeon/Downloads/SSAC/Swift/ClimbingDiary/BrideHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/joonhwanjeon/Downloads/SSAC/Swift/ClimbingDiary/BridgeHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

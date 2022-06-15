@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class HomeImageView: UIView, ViewRepresentable {
+final class HomeImageView: UIView, ViewRepresentable {
     let label = UILabel().then {
         $0.textColor = .black
         $0.text = "@@@@@@@@"

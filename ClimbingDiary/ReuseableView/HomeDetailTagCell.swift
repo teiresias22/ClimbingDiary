@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class HomeDetailTagCell: UICollectionViewCell{
+final class HomeDetailTagCell: UICollectionViewCell{
     static let identifier = "HomeDetailTagCell"
     
     let label = UILabel().then {

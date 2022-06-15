@@ -22,24 +22,39 @@ class HomeDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //전화 연결 권한 요청
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        //기본 화면 설정
         setViewLabels()
         setButtonStack()
         
+        //슬라이드 기본 설정
         progressSet()
         activateTimer()
         
+        //CollectionView 설정
         setImageSliderView()
         setTagCollectionView()
+        
+        //버튼뷰 클릭 설정
+        addViewTapped()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         let segmentSize = viewModel.homeDetailNo.image.count
         mainView.imageSliderView.scrollToItem(at: IndexPath(item: segmentSize,
                                                             section: 0),
                                               at: .centeredHorizontally,
                                               animated: false)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setViewLabels() {
@@ -89,25 +104,26 @@ class HomeDetailViewController: BaseViewController {
                                           animated: false)
     }
     
-    func setImageSliderView() {
+    private func setImageSliderView() {
         mainView.imageSliderView.delegate = self
         mainView.imageSliderView.dataSource = self
         mainView.imageSliderView.register(HomeDetailImageCell.self, forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
     }
     
-    func setTagCollectionView() {
+    private func setTagCollectionView() {
         mainView.tagCollectionView.delegate = self
         mainView.tagCollectionView.dataSource = self
         mainView.tagCollectionView.register(HomeDetailTagCell.self, forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
     }
     
-    func setButtonStack() {
+    private func setButtonStack() {
         mainView.sectorButton.text.text = viewModel.homeDetailNo.numOfSector
         mainView.openHourButton.label.text = nowDate()
         mainView.openHourButton.text.text = viewModel.homeDetailNo.openingHours[setOpeningHours()]
     }
     
-    func nowDate() -> String {
+    //MARK: - SETDATE
+    private func nowDate() -> String {
         let nowDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko")
@@ -117,7 +133,7 @@ class HomeDetailViewController: BaseViewController {
         return todayDate
     }
     
-    func setOpeningHours() -> Int {
+    private func setOpeningHours() -> Int {
         let nowDate = nowDate()
         var index = 6
         
@@ -137,7 +153,8 @@ class HomeDetailViewController: BaseViewController {
         return index
     }
     
-    func startTimer() {
+    //MARK: - TIMER
+    private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 2,
                                      target: self,
                                      selector: #selector(moveToNextIndex),
@@ -151,9 +168,92 @@ class HomeDetailViewController: BaseViewController {
                                               at: .centeredHorizontally,
                                               animated: true)
     }
+    
+    //MARK: - visibleCellIndexPath
+    private func visibleCellIndexPath() -> IndexPath {
+        return mainView.imageSliderView.indexPathsForVisibleItems[0]
+    }
+    
+    private func addViewTapped() {
+        addTargetLocationView()
+        addTargetSectorView()
+        addTargetCallView()
+    }
+    
+    //MARK: - LocationViewTapped
+    private func addTargetLocationView() {
+        let tap = CustomTapGestureRecognizer(target: self, action: #selector(locationViewTapped))
+        mainView.locationButton.isUserInteractionEnabled = true
+        mainView.locationButton.addGestureRecognizer(tap)
+    }
+    
+    @objc func locationViewTapped() {
+        let vc = HomeMapViewController()
+        vc.viewModel = viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //MARK: - SectorViewTapped
+    private func addTargetSectorView() {
+        let tap = CustomTapGestureRecognizer(target: self, action: #selector(sectorViewTapped))
+        mainView.sectorButton.isUserInteractionEnabled = true
+        mainView.sectorButton.addGestureRecognizer(tap)
+    }
+    
+    @objc func sectorViewTapped() {
+        toastMessage(message: "\(viewModel.homeDetailNo.changeOfSector)마다 1개 섹터가 변경됩니다.")
+    }
+    
+    //MARK: - SectorViewTapped
+    private func addTargetCallView() {
+        let tap = CustomTapGestureRecognizer(target: self, action: #selector(callViewTapped))
+        mainView.callButton.isUserInteractionEnabled = true
+        mainView.callButton.addGestureRecognizer(tap)
+    }
+    
+    //MARK: - CallViewTapped
+    @objc func callViewTapped() {
+        let number: Int = viewModel.homeDetailNo.callNumber
+        if let url = NSURL(string: "tel://0" + "\(number)"),
+                           UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    //통화 종료후 돌아올 화면 설정
+    @objc func didEnterBackground() {
+        let vc = TabBarViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
-extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//MARK: - UICollectionViewDelegate
+extension HomeDetailViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        invalidateTimer()
+        activateTimer()
+        var images = viewModel.homeDetailNo.image
+        var item = visibleCellIndexPath().item
+        
+        if item == images.count * 3 - 2 {
+            item = images.count * 2
+        } else if item == 1 {
+            item = images.count + 1
+        }
+        
+        mainView.imageSliderView.scrollToItem(at: IndexPath(item: item, section: 0),
+                                              at: .centeredHorizontally,
+                                              animated: false)
+        
+        let unitCount: Int = item % images.count + 1
+        progress?.completedUnitCount = Int64(unitCount)
+        mainView.progressView.setProgress(Float(progress!.fractionCompleted), animated: false)
+    }
+}
+
+//MARK: - UICollectionViewDataSource
+extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.imageSliderView {
             return viewModel.homeDetailNo.image.count * 3
@@ -198,33 +298,9 @@ extension HomeDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             print(#function)
         }
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        invalidateTimer()
-        activateTimer()
-        var images = viewModel.homeDetailNo.image
-        var item = visibleCellIndexPath().item
-        
-        if item == images.count * 3 - 2 {
-            item = images.count * 2
-        } else if item == 1 {
-            item = images.count + 1
-        }
-        
-        mainView.imageSliderView.scrollToItem(at: IndexPath(item: item, section: 0),
-                                              at: .centeredHorizontally,
-                                              animated: false)
-        
-        let unitCount: Int = item % images.count + 1
-        progress?.completedUnitCount = Int64(unitCount)
-        mainView.progressView.setProgress(Float(progress!.fractionCompleted), animated: false)
-    }
-    
-    private func visibleCellIndexPath() -> IndexPath {
-        return mainView.imageSliderView.indexPathsForVisibleItems[0]
-    }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
 extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == mainView.imageSliderView {

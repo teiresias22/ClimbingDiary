@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class HomeDetailImageCell: UICollectionViewCell{
+final class HomeDetailImageCell: UICollectionViewCell{
     static let identifier = "HomeDetailImageCell"
     
     let image = UIImageView().then {

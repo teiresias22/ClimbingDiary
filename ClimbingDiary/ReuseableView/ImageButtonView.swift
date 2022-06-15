@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ImageButtonView: UIView, ViewRepresentable {
+final class ImageButtonView: UIView, ViewRepresentable {
     let image = UIImageView().then {
         $0.tintColor = .black
     }

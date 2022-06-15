@@ -22,7 +22,7 @@ class HomeViewController: BaseViewController {
         setView()
     }
     
-    func setView(){
+    private func setView(){
         setUpViews(mainView.mainSectionView.label, mainView.mainSectionView.image, HomeViews.mainSection)
         setUpViews(mainView.firstSubView.label, mainView.firstSubView.image, HomeViews.firstView)
         setUpViews(mainView.secondSubView.label, mainView.secondSubView.image, HomeViews.secondView)
@@ -30,13 +30,13 @@ class HomeViewController: BaseViewController {
         setUpViews(mainView.forthSubView.label, mainView.forthSubView.image, HomeViews.forthView)
     }
     
-    func setUpViews(_ targetLabel: UILabel, _ targetView: UIImageView, _ target: HomeViews) {
+    private func setUpViews(_ targetLabel: UILabel, _ targetView: UIImageView, _ target: HomeViews) {
         targetLabel.text = target.text
         targetView.backgroundColor = target.color
         addTargetViewTapped(targetView, targetLabel, target)
     }
     
-    func addTargetViewTapped(_ targetView: UIImageView, _ targetLabel: UILabel, _ target : HomeViews) {
+    private func addTargetViewTapped(_ targetView: UIImageView, _ targetLabel: UILabel, _ target : HomeViews) {
         let viewTap = CustomTapGestureRecognizer(target: self, action: #selector(viewTapped(sender:)))
         viewTap.customNameValue = targetLabel.text
         viewTap.customColorValue = targetView.backgroundColor
@@ -54,7 +54,7 @@ class HomeViewController: BaseViewController {
     }
 }
 
-class CustomTapGestureRecognizer: UITapGestureRecognizer {
+final class CustomTapGestureRecognizer: UITapGestureRecognizer {
     var customNameValue: String?
     var customColorValue: UIColor?
 }
