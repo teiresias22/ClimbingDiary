@@ -213,6 +213,26 @@ class HomeDetailViewController: BaseViewController {
     
     //MARK: - CallViewTapped
     @objc func callViewTapped() {
+        let alert = UIAlertController(title: (viewModel.homeDetailNo.name),
+                                      message: "전화를 연결 할까요?",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let okAction = UIAlertAction(title: "통화 연결",
+                                     style: .default) { (action) in
+            self.telephoneConnect()
+        }
+        let cancelAction = UIAlertAction(title: "취소",
+                                         style: .cancel,
+                                         handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        present(alert,
+                animated: true,
+                completion: nil)
+    }
+    
+    private func telephoneConnect() {
         let number: Int = viewModel.homeDetailNo.callNumber
         if let url = NSURL(string: "tel://0" + "\(number)"),
                            UIApplication.shared.canOpenURL(url as URL) {
