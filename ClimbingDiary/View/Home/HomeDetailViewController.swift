@@ -21,12 +21,6 @@ class HomeDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //전화 연결 권한 요청
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didEnterBackground),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
         //기본 화면 설정
         setViewLabels()
         setButtonStack()
@@ -57,14 +51,14 @@ class HomeDetailViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func setViewLabels() {
+    private func setViewLabels() {
         mainView.topViewTitle.text = viewModel.homeDetailNo.name
         mainView.topViewSubTitle.text = viewModel.homeDetailNo.introduce
         mainView.moreInfoViewTopLabel.text = viewModel.homeDetailNo.parking
         mainView.moreInfoViewBottomLabel.text = viewModel.homeDetailNo.price
     }
     
-    func progressSet() {
+    private func progressSet() {
         mainView.progressView.progress = 0.0
         progress = Progress(totalUnitCount: Int64(viewModel.homeDetailNo.image.count))
         progress?.completedUnitCount = 1
@@ -213,31 +207,19 @@ class HomeDetailViewController: BaseViewController {
     
     //MARK: - CallViewTapped
     @objc func callViewTapped() {
-        let alert = UIAlertController(title: (viewModel.homeDetailNo.name),
-                                      message: "전화를 연결 할까요?",
-                                      preferredStyle: UIAlertController.Style.alert)
-        
-        let okAction = UIAlertAction(title: "통화 연결",
-                                     style: .default) { (action) in
-            self.telephoneConnect()
-        }
-        let cancelAction = UIAlertAction(title: "취소",
-                                         style: .cancel,
-                                         handler: nil)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        
-        present(alert,
-                animated: true,
-                completion: nil)
-    }
-    
-    private func telephoneConnect() {
+        self.checkEnterBackground()
         let number: Int = viewModel.homeDetailNo.callNumber
         if let url = NSURL(string: "tel://0" + "\(number)"),
                            UIApplication.shared.canOpenURL(url as URL) {
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         }
+    }
+    
+    private func checkEnterBackground() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
     }
     
     //통화 종료후 돌아올 화면 설정

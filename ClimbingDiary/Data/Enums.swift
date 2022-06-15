@@ -35,3 +35,9 @@ enum HomeViews {
         }
     }
 }
+
+enum mapType: Int {
+    case standard = 0 //기본형태
+    case staelite = 1 //위성형태
+    case hybrid = 2 //하이브리드
+}

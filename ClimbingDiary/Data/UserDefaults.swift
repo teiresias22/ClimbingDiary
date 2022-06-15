@@ -11,4 +11,7 @@ enum SetUserDefault: String {
     case isOnboarding = "isOnboarding"
     case idToken = "idToken"
     case FCMToken = "FCMToken"
+    
+    case mapType = "mapType"
+    case mapTrackingModeButton = "mapTrackingModeButton"
 }
