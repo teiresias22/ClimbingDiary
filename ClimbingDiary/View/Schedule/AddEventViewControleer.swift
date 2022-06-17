@@ -1,13 +1,13 @@
 //
-//  SearchViewController.swift
+//  AddEventViewControleer.swift
 //  ClimbingDiary
 //
-//  Created by Joonhwan Jeon on 2022/05/30.
+//  Created by Joonhwan Jeon on 2022/06/17.
 //
 
 import Foundation
 
-class SearchViewController: BaseViewController {
+class AddEventViewControleer: BaseViewController {
     let mainView = SearchView()
     
     override func loadView() {
@@ -16,6 +16,6 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "검색"
+        title = "추가"
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Joonhwan Jeon on 2022/06/02.
 //
 
-import UIKit
+import Foundation
 
 class HomeDetailViewController: BaseViewController {
     let mainView = HomeDetailView()
@@ -21,6 +21,7 @@ class HomeDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //기본 화면 설정
         setViewLabels()
         setButtonStack()
@@ -32,6 +33,7 @@ class HomeDetailViewController: BaseViewController {
         //CollectionView 설정
         setImageSliderView()
         setTagCollectionView()
+        setGradeCollectionVIew()
         
         //버튼뷰 클릭 설정
         addViewTapped()
@@ -101,13 +103,22 @@ class HomeDetailViewController: BaseViewController {
     private func setImageSliderView() {
         mainView.imageSliderView.delegate = self
         mainView.imageSliderView.dataSource = self
-        mainView.imageSliderView.register(HomeDetailImageCell.self, forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
+        mainView.imageSliderView.register(HomeDetailImageCell.self,
+                                          forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
+    }
+    
+    private func setGradeCollectionVIew() {
+        mainView.gradeCollectionView.delegate = self
+        mainView.gradeCollectionView.dataSource = self
+        mainView.gradeCollectionView.register(gradeCollectionViewCell.self,
+                                              forCellWithReuseIdentifier: gradeCollectionViewCell.reuseIdentifier)
     }
     
     private func setTagCollectionView() {
         mainView.tagCollectionView.delegate = self
         mainView.tagCollectionView.dataSource = self
-        mainView.tagCollectionView.register(HomeDetailTagCell.self, forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
+        mainView.tagCollectionView.register(HomeDetailTagCell.self,
+                                            forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
     }
     
     private func setButtonStack() {
@@ -259,6 +270,8 @@ extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.imageSliderView {
             return viewModel.homeDetailNo.image.count * 3
+        } else if collectionView == mainView.gradeCollectionView {
+            return viewModel.homeDetailNo.grade.count
         } else {
             return viewModel.homeDetailNo.tag.count
         }
@@ -273,6 +286,11 @@ extension HomeDetailViewController: UICollectionViewDataSource {
                 return item
             }
             return UICollectionViewCell()
+        } else if collectionView == mainView.gradeCollectionView {
+            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
+            
+            item.backgroundColor = viewModel.homeDetailNo.grade[indexPath.row]
+            return item
         } else {
             guard let item = mainView.tagCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
             item.label.text = viewModel.homeDetailNo.tag[indexPath.row]
@@ -284,6 +302,12 @@ extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) -> CGSize {
         if collectionView == mainView.imageSliderView {
             return CGSize(width: mainView.imageSliderView.frame.width, height: mainView.imageSliderView.frame.height)
+        } else if collectionView == mainView.gradeCollectionView {
+            let width = Double(mainView.gradeCollectionView.frame.width)
+            let count = Double(viewModel.homeDetailNo.grade.count)
+            let num = width / count
+            
+            return CGSize(width: num, height: 80)
         } else {
             return CGSize(width: 0, height: 0)
         }
@@ -296,6 +320,8 @@ extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == mainView.imageSliderView {
             print(#function)
+        } else if collectionView == mainView.gradeCollectionView {
+            print(#function)
         } else {
             print(#function)
         }
@@ -307,8 +333,18 @@ extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == mainView.imageSliderView {
             return CGSize(width: mainView.frame.width, height: 200)
+        } else if collectionView == mainView.gradeCollectionView {
+            let width = Double(mainView.gradeCollectionView.frame.width)
+            let count = Double(viewModel.homeDetailNo.grade.count)
+            let num = width / count
+            
+            return CGSize(width: num, height: 80)
         } else {
             return CGSize(width: mainView.frame.width, height: 20)
         }
     }
+}
+
+final class gradeCollectionViewCell: UICollectionViewCell {
+    static let reuseIdentifier = String(describing: gradeCollectionViewCell.self)
 }

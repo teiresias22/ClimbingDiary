@@ -42,6 +42,9 @@
 		753B21B4285603F200C922EF /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 753B2198285603F200C922EF /* map_pin_shadow.png */; };
 		753B21B5285603F200C922EF /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B2199285603F200C922EF /* DaumMap.framework */; };
 		753B21B9285639AA00C922EF /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753B21B8285639AA00C922EF /* Metal.framework */; };
+		753B21DC285A4F5400C922EF /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 753B21DB285A4F5400C922EF /* FSCalendar */; };
+		753B21DE285C244800C922EF /* AddEventViewControleer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21DD285C244800C922EF /* AddEventViewControleer.swift */; };
+		753B21E0285C244E00C922EF /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21DF285C244E00C922EF /* AddEventView.swift */; };
 		753C382E285517E400EEC8EF /* HomeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382D285517E400EEC8EF /* HomeMapView.swift */; };
 		753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382F285517ED00EEC8EF /* HomeMapViewController.swift */; };
 		755B40A42847143F0011B294 /* Crag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A32847143F0011B294 /* Crag.swift */; };
@@ -134,6 +137,8 @@
 		753B2198285603F200C922EF /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
 		753B2199285603F200C922EF /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
 		753B21B8285639AA00C922EF /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		753B21DD285C244800C922EF /* AddEventViewControleer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewControleer.swift; sourceTree = "<group>"; };
+		753B21DF285C244E00C922EF /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		753C382D285517E400EEC8EF /* HomeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapView.swift; sourceTree = "<group>"; };
 		753C382F285517ED00EEC8EF /* HomeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewController.swift; sourceTree = "<group>"; };
 		755B40A32847143F0011B294 /* Crag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crag.swift; sourceTree = "<group>"; };
@@ -192,6 +197,7 @@
 				753B216E2855BCD500C922EF /* libc++.tbd in Frameworks */,
 				753B21B9285639AA00C922EF /* Metal.framework in Frameworks */,
 				753B21672855BC3800C922EF /* SystemConfiguration.framework in Frameworks */,
+				753B21DC285A4F5400C922EF /* FSCalendar in Frameworks */,
 				75C514A12844B787008E74E3 /* Realm in Frameworks */,
 				75C514D12845B6C3008E74E3 /* FirebaseCrashlytics in Frameworks */,
 				75C514A32844B787008E74E3 /* RealmSwift in Frameworks */,
@@ -386,6 +392,8 @@
 			children = (
 				75C514B72844C84B008E74E3 /* ScheduleViewController.swift */,
 				75C514C22844F87E008E74E3 /* ScheduleView.swift */,
+				753B21DD285C244800C922EF /* AddEventViewControleer.swift */,
+				753B21DF285C244E00C922EF /* AddEventView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -453,6 +461,7 @@
 				75C514D22845B6C3008E74E3 /* FirebaseDatabaseSwift */,
 				75C514D42845B6C3008E74E3 /* FirebaseInAppMessagingSwift-Beta */,
 				75C514D62845B6C3008E74E3 /* FirebaseMessaging */,
+				753B21DB285A4F5400C922EF /* FSCalendar */,
 			);
 			productName = ClimbingDiary;
 			productReference = 75C514772844791E008E74E3 /* ClimbingDiary.app */;
@@ -487,6 +496,7 @@
 				75C5149F2844B787008E74E3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				75C514C82844FB69008E74E3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				75C514CD2845B6C3008E74E3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				753B21DA285A4F5400C922EF /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 75C514782844791E008E74E3 /* Products */;
 			projectDirPath = "";
@@ -553,6 +563,7 @@
 				755B40B8284A72170011B294 /* Enums.swift in Sources */,
 				75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */,
 				75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */,
+				753B21DE285C244800C922EF /* AddEventViewControleer.swift in Sources */,
 				75C514DF28460286008E74E3 /* HomeImageView.swift in Sources */,
 				75C514C32844F87E008E74E3 /* ScheduleView.swift in Sources */,
 				755B40A6284714470011B294 /* CragInformation.swift in Sources */,
@@ -568,6 +579,7 @@
 				75C514E52846892C008E74E3 /* HomeListCell.swift in Sources */,
 				75C514DA2845B954008E74E3 /* UserDefaults.swift in Sources */,
 				755B40B4284914A70011B294 /* HomeDetailImageCell.swift in Sources */,
+				753B21E0285C244E00C922EF /* AddEventView.swift in Sources */,
 				755B40B6284914B20011B294 /* HomeDetailTagCell.swift in Sources */,
 				75C514B82844C84B008E74E3 /* ScheduleViewController.swift in Sources */,
 				753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */,
@@ -799,6 +811,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		753B21DA285A4F5400C922EF /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		75C5149C2844B6AE008E74E3 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -834,6 +854,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		753B21DB285A4F5400C922EF /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 753B21DA285A4F5400C922EF /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		75C5149D2844B6AE008E74E3 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 75C5149C2844B6AE008E74E3 /* XCRemoteSwiftPackageReference "Then" */;

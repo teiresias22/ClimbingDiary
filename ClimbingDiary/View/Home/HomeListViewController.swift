@@ -5,7 +5,7 @@
 //  Created by Joonhwan Jeon on 2022/06/01.
 //
 
-import UIKit
+import Foundation
 
 class HomeListViewController: BaseViewController {
     let mainView = HomeListView()

@@ -5,7 +5,7 @@
 //  Created by Joonhwan Jeon on 2022/05/30.
 //
 
-import UIKit
+import Foundation
 
 class HomeViewController: BaseViewController {
     let mainView = HomeView()
@@ -19,6 +19,7 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         title = "메인"
         
+        topViewClicked()
         setView()
     }
     
@@ -52,6 +53,18 @@ class HomeViewController: BaseViewController {
         vc.viewModel = viewModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func topViewClicked(){
+        let viewTap = CustomTapGestureRecognizer(target: self, action: #selector(topViewTapped))
+        mainView.topView.isUserInteractionEnabled = true
+        mainView.topView.addGestureRecognizer(viewTap)
+    }
+    
+    @objc func topViewTapped() {
+        let vc = MyPageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 final class CustomTapGestureRecognizer: UITapGestureRecognizer {

@@ -5,7 +5,7 @@
 //  Created by Joonhwan Jeon on 2022/06/12.
 //
 
-import UIKit
+import Foundation
 import CoreLocation
 
 class HomeMapViewController: BaseViewController {

@@ -70,7 +70,20 @@ class HomeDetailView: UIView, ViewRepresentable {
         $0.label.text = "전화"
     }
     
-    let tagCollectionView:  UICollectionView = {
+    let gradeCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.isPagingEnabled = true
+        view.showsHorizontalScrollIndicator = false
+        return view
+    }()
+    
+    
+    let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -149,6 +162,8 @@ class HomeDetailView: UIView, ViewRepresentable {
         buttonsStackView.addArrangedSubview(openHourButton)
         buttonsStackView.addArrangedSubview(callButton)
         
+        contentView.addSubview(gradeCollectionView)
+        
         contentView.addSubview(tagCollectionView)
         
         contentView.addSubview(moreInfoView)
@@ -210,8 +225,14 @@ class HomeDetailView: UIView, ViewRepresentable {
             $0.height.equalTo(100)
         }
         
-        tagCollectionView.snp.makeConstraints {
+        gradeCollectionView.snp.makeConstraints {
             $0.top.equalTo(buttonsStackView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(80)
+        }
+        
+        tagCollectionView.snp.makeConstraints {
+            $0.top.equalTo(gradeCollectionView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(120)
         }

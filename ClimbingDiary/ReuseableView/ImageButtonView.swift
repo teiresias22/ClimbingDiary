@@ -43,8 +43,9 @@ final class ImageButtonView: UIView, ViewRepresentable {
         }
         
         image.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(label.snp.top).offset(-4)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-10)
+            $0.size.width.equalTo(50)
         }
     }
 }
