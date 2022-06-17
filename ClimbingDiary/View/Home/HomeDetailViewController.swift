@@ -307,7 +307,7 @@ extension HomeDetailViewController: UICollectionViewDataSource {
             let count = Double(viewModel.homeDetailNo.grade.count)
             let num = width / count
             
-            return CGSize(width: num, height: 80)
+            return CGSize(width: num, height: 40)
         } else {
             return CGSize(width: 0, height: 0)
         }
@@ -338,7 +338,7 @@ extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
             let count = Double(viewModel.homeDetailNo.grade.count)
             let num = width / count
             
-            return CGSize(width: num, height: 80)
+            return CGSize(width: num, height: 40)
         } else {
             return CGSize(width: mainView.frame.width, height: 20)
         }

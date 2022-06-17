@@ -225,14 +225,8 @@ class HomeDetailView: UIView, ViewRepresentable {
             $0.height.equalTo(100)
         }
         
-        gradeCollectionView.snp.makeConstraints {
-            $0.top.equalTo(buttonsStackView.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(40)
-            $0.height.equalTo(80)
-        }
-        
         tagCollectionView.snp.makeConstraints {
-            $0.top.equalTo(gradeCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(buttonsStackView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(120)
         }
@@ -256,7 +250,7 @@ class HomeDetailView: UIView, ViewRepresentable {
         bottomStackView.snp.makeConstraints {
             $0.top.equalTo(moreInfoView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(40)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.height.equalTo(30)
         }
         
         shareButton.snp.makeConstraints {
@@ -265,6 +259,13 @@ class HomeDetailView: UIView, ViewRepresentable {
         
         siteButton.snp.makeConstraints {
             $0.width.equalTo(shareButton.snp.width)
+        }
+        
+        gradeCollectionView.snp.makeConstraints {
+            $0.top.equalTo(bottomStackView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(40)
+            $0.bottom.equalToSuperview()
         }
     }
 }
