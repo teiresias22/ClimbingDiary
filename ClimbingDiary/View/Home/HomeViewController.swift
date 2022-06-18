@@ -47,7 +47,7 @@ class HomeViewController: BaseViewController {
     
     @objc func viewTapped(sender: CustomTapGestureRecognizer) {
         viewModel.homeListTitle.value = sender.customNameValue ?? "알수 없는 분류"
-        viewModel.homeListImage = sender.customColorValue ?? .gray
+        viewModel.homeListImage = sender.customColorValue ?? .systemGray
         
         let vc = HomeListViewController()
         vc.viewModel = viewModel

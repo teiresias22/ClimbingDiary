@@ -45,6 +45,11 @@
 		753B21DC285A4F5400C922EF /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 753B21DB285A4F5400C922EF /* FSCalendar */; };
 		753B21DE285C244800C922EF /* AddEventViewControleer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21DD285C244800C922EF /* AddEventViewControleer.swift */; };
 		753B21E0285C244E00C922EF /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21DF285C244E00C922EF /* AddEventView.swift */; };
+		753B21E2285CDBB500C922EF /* Colors+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E1285CDBB500C922EF /* Colors+Extention.swift */; };
+		753B21E4285CFB0C00C922EF /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E3285CFB0C00C922EF /* ScheduleModel.swift */; };
+		753B21E6285CFD9B00C922EF /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E5285CFD9B00C922EF /* InputView.swift */; };
+		753B21E8285E303B00C922EF /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E7285E303B00C922EF /* City.swift */; };
+		753B21EA285E313900C922EF /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E9285E313900C922EF /* CityInformation.swift */; };
 		753C382E285517E400EEC8EF /* HomeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382D285517E400EEC8EF /* HomeMapView.swift */; };
 		753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382F285517ED00EEC8EF /* HomeMapViewController.swift */; };
 		755B40A42847143F0011B294 /* Crag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A32847143F0011B294 /* Crag.swift */; };
@@ -139,6 +144,11 @@
 		753B21B8285639AA00C922EF /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		753B21DD285C244800C922EF /* AddEventViewControleer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewControleer.swift; sourceTree = "<group>"; };
 		753B21DF285C244E00C922EF /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		753B21E1285CDBB500C922EF /* Colors+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Extention.swift"; sourceTree = "<group>"; };
+		753B21E3285CFB0C00C922EF /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
+		753B21E5285CFD9B00C922EF /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		753B21E7285E303B00C922EF /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		753B21E9285E313900C922EF /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
 		753C382D285517E400EEC8EF /* HomeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapView.swift; sourceTree = "<group>"; };
 		753C382F285517ED00EEC8EF /* HomeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewController.swift; sourceTree = "<group>"; };
 		755B40A32847143F0011B294 /* Crag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crag.swift; sourceTree = "<group>"; };
@@ -307,7 +317,6 @@
 				75C514DB2845C4AB008E74E3 /* ClimbingDiary.entitlements */,
 				75C51491284489DC008E74E3 /* View */,
 				75C5149428448A07008E74E3 /* Model */,
-				75C51493284489ED008E74E3 /* ReuseableView */,
 				75C51490284489D5008E74E3 /* Extention */,
 				75C514BD2844EBFE008E74E3 /* Protocols */,
 				75C514D82845B8DF008E74E3 /* Data */,
@@ -325,6 +334,7 @@
 		75C51490284489D5008E74E3 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				753B21E1285CDBB500C922EF /* Colors+Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -339,6 +349,7 @@
 				75C514B22844C04B008E74E3 /* MyPage */,
 				75C514952844AC11008E74E3 /* BaseViewController.swift */,
 				75C514B32844C237008E74E3 /* TabBarViewController.swift */,
+				75C51493284489ED008E74E3 /* ReuseableView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -352,6 +363,7 @@
 				75C514E42846892C008E74E3 /* HomeListCell.swift */,
 				755B40B3284914A70011B294 /* HomeDetailImageCell.swift */,
 				755B40B5284914B20011B294 /* HomeDetailTagCell.swift */,
+				753B21E5285CFD9B00C922EF /* InputView.swift */,
 			);
 			path = ReuseableView;
 			sourceTree = "<group>";
@@ -360,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				755B40A728474C150011B294 /* HomeViewModel.swift */,
+				753B21E3285CFB0C00C922EF /* ScheduleModel.swift */,
 				755B40A9284762210011B294 /* Observable.swift */,
 			);
 			path = Model;
@@ -430,6 +443,8 @@
 				75C514D92845B954008E74E3 /* UserDefaults.swift */,
 				755B40A32847143F0011B294 /* Crag.swift */,
 				755B40A5284714470011B294 /* CragInformation.swift */,
+				753B21E7285E303B00C922EF /* City.swift */,
+				753B21E9285E313900C922EF /* CityInformation.swift */,
 				755B40B7284A72170011B294 /* Enums.swift */,
 			);
 			path = Data;
@@ -564,10 +579,12 @@
 				75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */,
 				75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */,
 				753B21DE285C244800C922EF /* AddEventViewControleer.swift in Sources */,
+				753B21E4285CFB0C00C922EF /* ScheduleModel.swift in Sources */,
 				75C514DF28460286008E74E3 /* HomeImageView.swift in Sources */,
 				75C514C32844F87E008E74E3 /* ScheduleView.swift in Sources */,
 				755B40A6284714470011B294 /* CragInformation.swift in Sources */,
 				75C514C12844EC2C008E74E3 /* HomeView.swift in Sources */,
+				753B21E2285CDBB500C922EF /* Colors+Extention.swift in Sources */,
 				755B40A42847143F0011B294 /* Crag.swift in Sources */,
 				753C382E285517E400EEC8EF /* HomeMapView.swift in Sources */,
 				75C514C72844F8D9008E74E3 /* MyPageView.swift in Sources */,
@@ -580,11 +597,14 @@
 				75C514DA2845B954008E74E3 /* UserDefaults.swift in Sources */,
 				755B40B4284914A70011B294 /* HomeDetailImageCell.swift in Sources */,
 				753B21E0285C244E00C922EF /* AddEventView.swift in Sources */,
+				753B21E6285CFD9B00C922EF /* InputView.swift in Sources */,
+				753B21EA285E313900C922EF /* CityInformation.swift in Sources */,
 				755B40B6284914B20011B294 /* HomeDetailTagCell.swift in Sources */,
 				75C514B82844C84B008E74E3 /* ScheduleViewController.swift in Sources */,
 				753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */,
 				75C514B62844C6CF008E74E3 /* HomeViewController.swift in Sources */,
 				75C514BF2844EC1C008E74E3 /* ViewRepresentable.swift in Sources */,
+				753B21E8285E303B00C922EF /* City.swift in Sources */,
 				755B40AA284762210011B294 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

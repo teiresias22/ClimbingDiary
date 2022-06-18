@@ -14,23 +14,23 @@ final class HomeListCell: UITableViewCell {
     
     let titleLabel = UILabel().then {
         $0.text = "Title_@@@@"
-        $0.backgroundColor = .systemGray2
+        $0.backgroundColor = .customGray2
     }
     
     let subTitleLabel = UILabel().then {
         $0.text = "SubTitle_@@@@"
         $0.numberOfLines = 2
-        $0.backgroundColor = .systemGray3
+        $0.backgroundColor = .customGray3
     }
     
     let rightTopLabel = UILabel().then {
         $0.text = "Distance_@@@@"
-        $0.backgroundColor = .systemGray4
+        $0.backgroundColor = .customGray4
     }
     
     let rightBottomLabel = UILabel().then {
         $0.text = "Location_@@@@"
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = .customGray5
     }
         
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

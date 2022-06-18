@@ -11,10 +11,12 @@ import Then
 
 class HomeListView: UIView, ViewRepresentable {
     let image = UIImageView().then {
-        $0.backgroundColor = .systemGray
+        $0.backgroundColor = .customGray4
     }
     
-    let tableView = UITableView()
+    let tableView = UITableView().then {
+        $0.backgroundColor = .customWhite
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

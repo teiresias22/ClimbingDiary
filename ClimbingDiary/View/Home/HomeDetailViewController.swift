@@ -122,7 +122,7 @@ class HomeDetailViewController: BaseViewController {
     }
     
     private func setButtonStack() {
-        mainView.sectorButton.text.text = viewModel.homeDetailNo.numOfSector
+        mainView.sectorButton.text.text = "\(viewModel.homeDetailNo.numOfSector)"
         mainView.openHourButton.label.text = nowDate()
         mainView.openHourButton.text.text = viewModel.homeDetailNo.openingHours[setOpeningHours()]
     }

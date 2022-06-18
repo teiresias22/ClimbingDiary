@@ -11,18 +11,19 @@ import Then
 
 class HomeView: UIView, ViewRepresentable {
     let topView = UIView().then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .customGray5
         $0.layer.cornerRadius = 8
     }
     
     let userNameLabel = UILabel().then {
         $0.text = "SwiftUser"
+        $0.textColor = .customBlack
     }
     
     let userImage = UIImageView().then {
-        $0.backgroundColor = .systemCyan
+        $0.backgroundColor = .customBlue
         $0.layer.cornerRadius = 20
-        $0.layer.borderColor = UIColor.black.cgColor
+        $0.layer.borderColor = UIColor.customBlack?.cgColor
         $0.layer.borderWidth = 2
     }
     

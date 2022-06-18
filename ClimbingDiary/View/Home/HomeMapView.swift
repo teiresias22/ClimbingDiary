@@ -25,24 +25,24 @@ class HomeMapView: UIView, ViewRepresentable, MTMapViewDelegate {
         $0.setImage(UIImage(systemName: "square.stack.3d.up"), for: .normal)
         $0.setTitle("", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.tintColor = .black
-        $0.backgroundColor = .white
+        $0.tintColor = .customBlack
+        $0.backgroundColor = .customWhite
     }
     
     let mapTrackingModeButton = UIButton().then {
         $0.setImage(UIImage(systemName: "location.north"), for: .normal)
         $0.setTitle("", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.tintColor = .black
-        $0.backgroundColor = .white
+        $0.tintColor = .customBlack
+        $0.backgroundColor = .customWhite
     }
     
     let mapLocationTrakingModeButton = UIButton().then {
         $0.setImage(UIImage(systemName: "mappin.and.ellipse"), for: .normal)
         $0.setTitle("", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.tintColor = .black
-        $0.backgroundColor = .white
+        $0.tintColor = .customBlack
+        $0.backgroundColor = .customWhite
     }
         
     override init(frame: CGRect) {

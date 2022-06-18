@@ -96,20 +96,20 @@ class HomeMapViewController: BaseViewController {
     
     private func standardMapType() {
         mainView.mapView.baseMapType = .standard
-        mainView.mapTypeButton.backgroundColor = .white
-        mainView.mapTypeButton.tintColor = .black
+        mainView.mapTypeButton.backgroundColor = .customWhite
+        mainView.mapTypeButton.tintColor = .customBlack
     }
     
     private func satelliteMapType() {
         mainView.mapView.baseMapType = .satellite
-        mainView.mapTypeButton.backgroundColor = .systemCyan
-        mainView.mapTypeButton.tintColor = .white
+        mainView.mapTypeButton.backgroundColor = .customBlue
+        mainView.mapTypeButton.tintColor = .customWhite
     }
     
     private func hybridMapType() {
         mainView.mapView.baseMapType = .hybrid
-        mainView.mapTypeButton.backgroundColor = .systemBlue
-        mainView.mapTypeButton.tintColor = .white
+        mainView.mapTypeButton.backgroundColor = .customBlue
+        mainView.mapTypeButton.tintColor = .customWhite
     }
     
     //MARK: - MapTrakingMode
@@ -137,14 +137,14 @@ class HomeMapViewController: BaseViewController {
     
     private func mapTrakingActive(){
         mainView.mapView.currentLocationTrackingMode = .onWithHeading
-        mainView.mapTrackingModeButton.backgroundColor = .systemBlue
-        mainView.mapTrackingModeButton.tintColor = .white
+        mainView.mapTrackingModeButton.backgroundColor = .customBlue
+        mainView.mapTrackingModeButton.tintColor = .customWhite
     }
     
     private func mapTrakingDeactive() {
         mainView.mapView.currentLocationTrackingMode = .onWithoutHeading
-        mainView.mapTrackingModeButton.backgroundColor = .white
-        mainView.mapTrackingModeButton.tintColor = .black
+        mainView.mapTrackingModeButton.backgroundColor = .customWhite
+        mainView.mapTrackingModeButton.tintColor = .customBlack
     }
     
     //MARK: - MapLocationTrackingMode
@@ -163,14 +163,14 @@ class HomeMapViewController: BaseViewController {
         mainView.mapView.setMapCenter(.init(geoCoord: .init(latitude: viewModel.homeDetailNo.latitude,
                                                             longitude: viewModel.homeDetailNo.longitude)),
                                       animated: true)
-        mainView.mapLocationTrakingModeButton.tintColor = .black
-        mainView.mapLocationTrakingModeButton.backgroundColor = .white
+        mainView.mapLocationTrakingModeButton.tintColor = .customBlack
+        mainView.mapLocationTrakingModeButton.backgroundColor = .customWhite
     }
     
     private func goToLocation() {
         mainView.mapView.showCurrentLocationMarker = true
-        mainView.mapLocationTrakingModeButton.tintColor = .white
-        mainView.mapLocationTrakingModeButton.backgroundColor = .systemBlue
+        mainView.mapLocationTrakingModeButton.tintColor = .customWhite
+        mainView.mapLocationTrakingModeButton.backgroundColor = .customBlue
         checkMapTrakingMode()
     }
 }

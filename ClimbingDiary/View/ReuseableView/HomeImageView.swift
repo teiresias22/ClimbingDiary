@@ -11,12 +11,12 @@ import Then
 
 final class HomeImageView: UIView, ViewRepresentable {
     let label = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .customBlack
         $0.text = "@@@@@@@@"
     }
     
     let image = UIImageView().then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     

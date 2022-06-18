@@ -40,6 +40,7 @@ extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeListCell.identifier, for: indexPath) as? HomeListCell else { return UITableViewCell() }
         let target = CragInformation.init().cragList[indexPath.row]
         
+        cell.backgroundColor = .customWhite
         cell.titleLabel.text = target.name
         cell.subTitleLabel.text = target.introduce
         cell.rightTopLabel.text = target.name

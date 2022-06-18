@@ -14,10 +14,10 @@ class ScheduleView: UIView, ViewRepresentable {
     let calendar = FSCalendar().then {
         $0.headerHeight = 50
         $0.appearance.headerDateFormat = "YYYY년 M월"
-        $0.appearance.headerTitleColor = .black
+        $0.appearance.headerTitleColor = .customBlack
         $0.appearance.headerTitleFont = UIFont.systemFont(ofSize: 24)
-        $0.appearance.weekdayTextColor = .black
-        $0.appearance.titleWeekendColor = .systemBlue
+        $0.appearance.weekdayTextColor = .customBlack
+        $0.appearance.titleWeekendColor = .customBlue
         $0.scrollEnabled = true
         $0.scrollDirection = .vertical
         $0.locale = Locale(identifier: "ko_KR")
@@ -25,19 +25,21 @@ class ScheduleView: UIView, ViewRepresentable {
     
     let todayButton = UIButton().then {
         $0.setTitle("오늘", for: .normal)
-        $0.tintColor = .black
-        $0.backgroundColor = .systemGray
+        $0.tintColor = .customBlack
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     
     let addEventButton = UIButton().then {
         $0.setTitle("추가", for: .normal)
-        $0.tintColor = .black
-        $0.backgroundColor = .systemGray
+        $0.tintColor = .customBlack
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     
-    let tableView = UITableView()
+    let tableView = UITableView().then {
+        $0.backgroundColor = .customWhite
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

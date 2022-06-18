@@ -5,8 +5,6 @@
 //  Created by Joonhwan Jeon on 2022/06/01.
 //
 
-import Foundation
-import CoreLocation
 import UIKit
 
 struct crag {
@@ -14,10 +12,11 @@ struct crag {
     
     let name: String
     let introduce: String
+    let cityCode: Int
     let location: String
     let latitude: Double
     let longitude: Double
-    let numOfSector: String
+    let numOfSector: Int
     let changeOfSector: String
     let openingHours: [String]
     let callNumber: Int

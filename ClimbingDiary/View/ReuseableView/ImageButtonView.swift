@@ -11,11 +11,11 @@ import Then
 
 final class ImageButtonView: UIView, ViewRepresentable {
     let image = UIImageView().then {
-        $0.tintColor = .black
+        $0.tintColor = .customBlack
     }
     
     let label = UILabel().then {
-        $0.textColor = .gray
+        $0.textColor = .customGray4
         $0.text = "@@@@@@"
         $0.textAlignment = .center
     }

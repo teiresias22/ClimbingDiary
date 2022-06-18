@@ -14,6 +14,7 @@ final class HomeDetailTagCell: UICollectionViewCell{
     
     let label = UILabel().then {
         $0.text = "@@@@@@"
+        $0.textColor = .customBlack
     }
     
     override init(frame: CGRect) {

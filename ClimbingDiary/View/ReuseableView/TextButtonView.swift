@@ -11,14 +11,14 @@ import Then
 
 final class TextButtonView: UIView, ViewRepresentable {
     let text = UILabel().then {
-        $0.textColor = .black
+        $0.textColor = .customBlack
         $0.textAlignment = .center
         $0.font = .systemFont(ofSize: 56)
         $0.adjustsFontSizeToFitWidth = true
     }
     
     let label = UILabel().then {
-        $0.textColor = .gray
+        $0.textColor = .customGray4
         $0.text = "@@@@@@"
         $0.textAlignment = .center
     }

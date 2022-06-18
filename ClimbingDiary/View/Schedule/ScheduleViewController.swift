@@ -10,6 +10,7 @@ import FSCalendar
 
 class ScheduleViewController: BaseViewController {
     let mainView = ScheduleView()
+    var viewModel = ScheduleModel()
     
     let dateFormatter = DateFormatter()
     
@@ -43,19 +44,25 @@ class ScheduleViewController: BaseViewController {
     }
     
     @objc func goToday(){
-        var today = dateFormatter.string(from: Date())
+        let today = dateFormatter.string(from: Date())
         mainView.calendar.select(dateFormatter.date(from: today), scrollToDate: true)
     }
     
     @objc func addEvent() {
-        //일정 추가 페이지로 이동
+        if viewModel.selectDate.value.isEmpty {
+            viewModel.selectDate.value = dateFormatter.string(from: Date())
+        }
+        
+        let vc = AddEventViewControleer()
+        vc.viewModel = viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 //MARK: - FSCalendarDelegate
 extension ScheduleViewController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(dateFormatter.string(from: date) + "선택됨")
+        viewModel.selectDate.value = dateFormatter.string(from: date)
     }
     
     func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
@@ -92,6 +99,7 @@ extension ScheduleViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeListCell.identifier, for: indexPath) as? HomeListCell else { return UITableViewCell() }
         let target = CragInformation.init().cragList[indexPath.row]
         
+        cell.backgroundColor = .customWhite
         cell.titleLabel.text = target.name
         cell.subTitleLabel.text = target.introduce
         cell.rightTopLabel.text = target.name

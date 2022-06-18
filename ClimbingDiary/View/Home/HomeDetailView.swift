@@ -23,8 +23,8 @@ class HomeDetailView: UIView, ViewRepresentable {
      }()
     
     let progressView = UIProgressView().then {
-        $0.trackTintColor = .gray
-        $0.progressTintColor = .white
+        $0.trackTintColor = .customGray6
+        $0.progressTintColor = .customWhite
     }
     
     let scrollView = UIScrollView().then {
@@ -32,18 +32,20 @@ class HomeDetailView: UIView, ViewRepresentable {
     }
     
     let contentView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .customWhite
     }
     
     let topView = UIView()
     
     let topViewTitle = UILabel().then {
         $0.text = "@@@@@@@@"
+        $0.textColor = .customBlack
         $0.font = .systemFont(ofSize: 24)
     }
     
     let topViewSubTitle = UILabel().then {
         $0.text = "@@@@"
+        $0.textColor = .customBlack
         $0.numberOfLines = 0
     }
     
@@ -82,15 +84,15 @@ class HomeDetailView: UIView, ViewRepresentable {
         return view
     }()
     
-    
     let tagCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         view.layer.cornerRadius = 8
-        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderColor = UIColor.customBlack?.cgColor
         view.layer.borderWidth = 1
+        view.backgroundColor = .customWhite
         
         if let flowLayout = view.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -103,10 +105,12 @@ class HomeDetailView: UIView, ViewRepresentable {
     
     let moreInfoViewTopLabel = UILabel().then {
         $0.text = "@@@@@@@"
+        $0.textColor = .customBlack
     }
     
     let moreInfoViewBottomLabel = UILabel().then {
         $0.text = "@@@@@@@"
+        $0.textColor = .customBlack
     }
     
     let bottomStackView = UIStackView().then {
@@ -118,22 +122,22 @@ class HomeDetailView: UIView, ViewRepresentable {
     
     let reservationButton = UIButton().then {
         $0.setTitle("예약", for: .normal)
-        $0.tintColor = .white
-        $0.backgroundColor = .systemGray
+        $0.tintColor = .customWhite
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     
     let shareButton = UIButton().then {
         $0.setTitle("공유", for: .normal)
-        $0.tintColor = .white
-        $0.backgroundColor = .systemGray2
+        $0.tintColor = .customWhite
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     
     let siteButton = UIButton().then {
         $0.setTitle("사이트", for: .normal)
-        $0.tintColor = .white
-        $0.backgroundColor = .systemGray3
+        $0.tintColor = .customWhite
+        $0.backgroundColor = .customGray4
         $0.layer.cornerRadius = 8
     }
     

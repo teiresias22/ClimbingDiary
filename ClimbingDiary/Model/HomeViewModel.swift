@@ -5,7 +5,6 @@
 //  Created by Joonhwan Jeon on 2022/06/01.
 //
 
-import Foundation
 import UIKit
 
 class HomeViewModel {

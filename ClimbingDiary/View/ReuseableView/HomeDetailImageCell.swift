@@ -14,7 +14,7 @@ final class HomeDetailImageCell: UICollectionViewCell{
     static let identifier = "HomeDetailImageCell"
     
     let image = UIImageView().then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .customGray4
     }
     
     override init(frame: CGRect) {
