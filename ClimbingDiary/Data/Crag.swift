@@ -26,4 +26,6 @@ struct crag {
     let reservation: String
     let site : String
     let grade : [UIColor]
+    
+    let idCode: Int
 }

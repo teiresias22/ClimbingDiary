@@ -132,6 +132,8 @@ class AddEventView: UIView, ViewRepresentable {
         addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(saveButton)
         buttonStackView.addArrangedSubview(cancelButton)
+        
+        addSubview(pickerViewTextfield)
     }
     
     func setupConstraints() {
@@ -193,6 +195,11 @@ class AddEventView: UIView, ViewRepresentable {
             $0.top.equalTo(sectorInputCollectionView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalTo(gradeOutputCollectionView.snp.top).offset(-20)
+        }
+        
+        pickerViewTextfield.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.width.height.equalTo(0)
         }
     }
 }

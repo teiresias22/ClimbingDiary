@@ -15,8 +15,8 @@ class ScheduleModel {
     var cragList = CragInformation()
     
     var cityCode: Observable<Int> = Observable(11)
+    var targetCrag: Observable<Int> = Observable(0)
     
-    var targetCrag = CragInformation().cragList
     var selectGrade: [UIColor] = []
     var selectSector: [String] = []
 }

@@ -21,10 +21,9 @@ class AddEventViewControleer: BaseViewController {
         super.viewDidLoad()
         title = "추가"
         
+        //초기세팅
         setDateLabel()
         setTitleLabel()
-        
-        //DatePicker 생성
         setDateFormatter()
         
         setGradeCollectionViews()
@@ -74,16 +73,15 @@ class AddEventViewControleer: BaseViewController {
         pickerView.datePickerMode = .date
         pickerView.timeZone = NSTimeZone.local
         pickerView.maximumDate = Date()
-                
-        // 피커뷰 확인 취소 버튼 세팅
-        setPickerViewToolBar()
         
         mainView.pickerViewTextfield.inputView = pickerView
         pickerView.addTarget(self, action: #selector(dateValueChanged(_:)), for: .valueChanged)
+        setPickerViewToolBar()
     }
     
     @objc func dateValueChanged(_ sender: UIDatePicker) {
         viewModel.selectDate.value = dateFormatter.string(from: sender.date)
+        mainView.inputDateView.outputLabel.text = viewModel.selectDate.value
     }
     
     //MARK: - Setup TitleLabel && TitlePickerView
@@ -109,13 +107,10 @@ class AddEventViewControleer: BaseViewController {
         let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
-        
-        // 피커뷰 확인 취소 버튼 세팅
-        setPickerViewToolBar()
-        
+                
         mainView.pickerViewTextfield.inputView = pickerView
+        setPickerViewToolBar()
     }
-    
     
     //MARK: - Setup PickerViewToolBar
     private func setPickerViewToolBar() {
@@ -127,6 +122,7 @@ class AddEventViewControleer: BaseViewController {
         let btnCancel = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(onPickCancel))
         toolBar.setItems([btnCancel , space , btnDone], animated: true)
         toolBar.isUserInteractionEnabled = true
+        mainView.pickerViewTextfield.inputAccessoryView = toolBar
     }
     
     @objc func onPickDone(_ sender: UIDatePicker) {
@@ -165,10 +161,11 @@ extension AddEventViewControleer: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             viewModel.cityCode.value = viewModel.cityList.city[row].code
+            pickerView.reloadComponent(1)
         } else {
             let filterData = viewModel.cragList.cragList.filter { $0.cityCode == viewModel.cityCode.value }
-            viewModel.targetCrag.append(filterData[row])
-            mainView.inputTitleView.titleLabel.text = "\(filterData[row].name)"
+            mainView.inputTitleView.outputLabel.text = "\(filterData[row].name)"
+            viewModel.targetCrag.value = filterData[row].idCode
         }
     }
 }
@@ -176,23 +173,46 @@ extension AddEventViewControleer: UIPickerViewDelegate, UIPickerViewDataSource {
 //MARK: - UICollectionViewDelegate && DataSource
 extension AddEventViewControleer: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        if collectionView == mainView.gradeInputCollectionView {
+            if viewModel.targetCrag.value == 0 {
+                return 0
+            } else {
+                let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
+                return filterData[0].grade.count
+            }
+        } else if collectionView == mainView.gradeOutputCollectionView {
+            return viewModel.selectGrade.count
+        } else if collectionView == mainView.sectorInputCollectionView {
+            
+            return 0
+//            if viewModel.targetCrag.value.words.isEmpty {
+//                return 0
+//            } else {
+//                let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
+//                return filterData[0].numOfSector
+//            }
+        } else {
+            return viewModel.selectSector.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mainView.gradeInputCollectionView {
             guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
             
-            item.backgroundColor = .customBlue
+            let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
+            
+            item.backgroundColor = filterData[0].grade[indexPath.row]
+            
             return item
         } else if collectionView == mainView.gradeOutputCollectionView {
             guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
+            item.backgroundColor = viewModel.selectGrade[indexPath.row]
             
-            item.backgroundColor = .customBlue
             return item
         } else if collectionView == mainView.sectorInputCollectionView {
             guard let item = mainView.sectorInputCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
-            item.label.text = "테스트"
+            item.label.text = "섹터 테스트"
             
             return item
         } else {
