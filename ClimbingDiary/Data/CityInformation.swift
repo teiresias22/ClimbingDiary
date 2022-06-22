@@ -30,7 +30,5 @@ struct CityInformation {
         City(code: 31, city: "제주도"),
         City(code: 99, city: "기타"),
         City(code: 00, city: "모두")
-        
     ]
-
 }

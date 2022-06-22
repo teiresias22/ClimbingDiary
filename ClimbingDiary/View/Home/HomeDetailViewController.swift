@@ -21,22 +21,14 @@ class HomeDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //기본 화면 설정
-        setViewLabels()
-        setButtonStack()
-        
+                
         //슬라이드 기본 설정
         progressSet()
         activateTimer()
         
-        //CollectionView 설정
         setImageSliderView()
-        setTagCollectionView()
-        setGradeCollectionVIew()
-        
-        //버튼뷰 클릭 설정
-        addViewTapped()
+        setMenuSliderView()
+        setDisplayTableView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,13 +43,6 @@ class HomeDetailViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    private func setViewLabels() {
-        mainView.topViewTitle.text = viewModel.homeDetailNo.name
-        mainView.topViewSubTitle.text = viewModel.homeDetailNo.introduce
-        mainView.moreInfoViewTopLabel.text = viewModel.homeDetailNo.parking
-        mainView.moreInfoViewBottomLabel.text = viewModel.homeDetailNo.price
     }
     
     private func progressSet() {
@@ -107,24 +92,18 @@ class HomeDetailViewController: BaseViewController {
                                           forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
     }
     
-    private func setGradeCollectionVIew() {
-        mainView.gradeCollectionView.delegate = self
-        mainView.gradeCollectionView.dataSource = self
-        mainView.gradeCollectionView.register(gradeCollectionViewCell.self,
-                                              forCellWithReuseIdentifier: gradeCollectionViewCell.reuseIdentifier)
+    private func setMenuSliderView() {
+        mainView.menuSliderView.delegate = self
+        mainView.menuSliderView.dataSource = self
+        mainView.menuSliderView.register(HomeDetailTagCell.self,
+                                         forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
     }
     
-    private func setTagCollectionView() {
-        mainView.tagCollectionView.delegate = self
-        mainView.tagCollectionView.dataSource = self
-        mainView.tagCollectionView.register(HomeDetailTagCell.self,
-                                            forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
-    }
-    
-    private func setButtonStack() {
-        mainView.sectorButton.text.text = "\(viewModel.homeDetailNo.numOfSector)"
-        mainView.openHourButton.label.text = nowDate()
-        mainView.openHourButton.text.text = viewModel.homeDetailNo.openingHours[setOpeningHours()]
+    private func setDisplayTableView() {
+        mainView.displayTableView.delegate = self
+        mainView.displayTableView.dataSource = self
+        mainView.displayTableView.register(HomeDetailCell.self, forCellReuseIdentifier: HomeDetailCell.identifier)
+        mainView.displayTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
     //MARK: - SETDATE
@@ -177,43 +156,6 @@ class HomeDetailViewController: BaseViewController {
     //MARK: - visibleCellIndexPath
     private func visibleCellIndexPath() -> IndexPath {
         return mainView.imageSliderView.indexPathsForVisibleItems[0]
-    }
-    
-    private func addViewTapped() {
-        addTargetLocationView()
-        addTargetSectorView()
-        addTargetCallView()
-    }
-    
-    //MARK: - LocationViewTapped
-    private func addTargetLocationView() {
-        let tap = CustomTapGestureRecognizer(target: self, action: #selector(locationViewTapped))
-        mainView.locationButton.isUserInteractionEnabled = true
-        mainView.locationButton.addGestureRecognizer(tap)
-    }
-    
-    @objc func locationViewTapped() {
-        let vc = HomeMapViewController()
-        vc.viewModel = viewModel
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    //MARK: - SectorViewTapped
-    private func addTargetSectorView() {
-        let tap = CustomTapGestureRecognizer(target: self, action: #selector(sectorViewTapped))
-        mainView.sectorButton.isUserInteractionEnabled = true
-        mainView.sectorButton.addGestureRecognizer(tap)
-    }
-    
-    @objc func sectorViewTapped() {
-        toastMessage(message: "\(viewModel.homeDetailNo.changeOfSector)마다 1개 섹터가 변경됩니다.")
-    }
-    
-    //MARK: - SectorViewTapped
-    private func addTargetCallView() {
-        let tap = CustomTapGestureRecognizer(target: self, action: #selector(callViewTapped))
-        mainView.callButton.isUserInteractionEnabled = true
-        mainView.callButton.addGestureRecognizer(tap)
     }
     
     //MARK: - CallViewTapped
@@ -270,10 +212,8 @@ extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.imageSliderView {
             return viewModel.homeDetailNo.image.count * 3
-        } else if collectionView == mainView.gradeCollectionView {
-            return viewModel.homeDetailNo.grade.count
         } else {
-            return viewModel.homeDetailNo.tag.count
+            return DetailMenuInformation.init().detailMenu.count
         }
     }
     
@@ -286,14 +226,15 @@ extension HomeDetailViewController: UICollectionViewDataSource {
                 return item
             }
             return UICollectionViewCell()
-        } else if collectionView == mainView.gradeCollectionView {
-            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
-            
-            item.backgroundColor = viewModel.homeDetailNo.grade[indexPath.row]
-            return item
         } else {
-            guard let item = mainView.tagCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
-            item.label.text = viewModel.homeDetailNo.tag[indexPath.row]
+            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
+            
+            let list = DetailMenuInformation.init().detailMenu[indexPath.row]
+            item.layer.cornerRadius = 8
+            item.layer.borderWidth = 1
+            item.layer.borderColor = UIColor.customBlack?.cgColor
+            item.label.text = list.Title
+            item.backgroundColor = .customGray2
             
             return item
         }
@@ -302,25 +243,13 @@ extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) -> CGSize {
         if collectionView == mainView.imageSliderView {
             return CGSize(width: mainView.imageSliderView.frame.width, height: mainView.imageSliderView.frame.height)
-        } else if collectionView == mainView.gradeCollectionView {
-            let width = Double(mainView.gradeCollectionView.frame.width)
-            let count = Double(viewModel.homeDetailNo.grade.count)
-            let num = width / count
-            
-            return CGSize(width: num, height: 40)
         } else {
-            return CGSize(width: 0, height: 0)
+            return CGSize(width: 120, height: 60)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == mainView.imageSliderView {
-            print(#function)
-        } else if collectionView == mainView.gradeCollectionView {
             print(#function)
         } else {
             print(#function)
@@ -333,15 +262,35 @@ extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == mainView.imageSliderView {
             return CGSize(width: mainView.frame.width, height: 200)
-        } else if collectionView == mainView.gradeCollectionView {
-            let width = Double(mainView.gradeCollectionView.frame.width)
-            let count = Double(viewModel.homeDetailNo.grade.count)
-            let num = width / count
-            
-            return CGSize(width: num, height: 40)
         } else {
-            return CGSize(width: mainView.frame.width, height: 20)
+            return CGSize(width: 120, height: 60)
         }
+    }
+}
+
+//MARK: -
+extension HomeDetailViewController: UITableViewDelegate {
+    
+}
+
+extension HomeDetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeDetailCell.identifier, for: indexPath) as? HomeDetailCell else { return UITableViewCell() }
+        
+        cell.title.text = viewModel.homeDetailNo.name
+        cell.subTitle.text = viewModel.homeDetailNo.introduceText
+        cell.backgroundColor = .customGray1
+        
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return mainView.displayTableView.frame.height
     }
 }
 

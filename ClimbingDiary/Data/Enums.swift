@@ -5,7 +5,6 @@
 //  Created by Joonhwan Jeon on 2022/06/04.
 //
 
-import Foundation
 import UIKit
 
 enum HomeViews {

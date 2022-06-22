@@ -15,6 +15,7 @@ final class HomeDetailTagCell: UICollectionViewCell{
     let label = UILabel().then {
         $0.text = "@@@@@@"
         $0.textColor = .customBlack
+        $0.textAlignment = .center
     }
     
     override init(frame: CGRect) {

@@ -8,8 +8,6 @@
 import Foundation
 
 struct City {
-    
     let code: Int
     let city: String
-    
 }

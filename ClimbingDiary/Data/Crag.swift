@@ -5,27 +5,28 @@
 //  Created by Joonhwan Jeon on 2022/06/01.
 //
 
-import UIKit
+import Foundation
 
 struct crag {
-    let image: [UIColor]
-    
     let name: String
-    let introduce: String
+    let image: [UIColor] //추후에 이미지 준비되면 바뀔것
+    let introduceText: String
+    let callNumber: Int
+    
+    let grade : [UIColor]
+    let sector: [String]
+    let changeOfSector: Int
+    
+    
     let cityCode: Int
     let location: String
     let latitude: Double
     let longitude: Double
-    let numOfSector: Int
-    let changeOfSector: String
-    let openingHours: [String]
-    let callNumber: Int
-    let tag: [String]
-    let parking: String
+    
     let price: String
+    let parking: String
     let reservation: String
-    let site : String
-    let grade : [UIColor]
+    let openingHours: [String]
     
     let idCode: Int
 }

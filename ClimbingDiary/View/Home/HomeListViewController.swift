@@ -42,7 +42,7 @@ extension HomeListViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = .customWhite
         cell.titleLabel.text = target.name
-        cell.subTitleLabel.text = target.introduce
+        cell.subTitleLabel.text = target.introduceText
         cell.rightTopLabel.text = target.name
         cell.rightBottomLabel.text = target.name
         
