@@ -15,6 +15,8 @@ class HomeDetailViewController: BaseViewController {
     var cuttentCellIndex = 0
     var progress: Progress?
     
+    var buttonChange = false
+    
     override func loadView() {
         self.view = mainView
     }
@@ -27,8 +29,10 @@ class HomeDetailViewController: BaseViewController {
         activateTimer()
         
         setImageSliderView()
-        setMenuSliderView()
         setDisplayTableView()
+        
+        //ButtonSet
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,13 +96,6 @@ class HomeDetailViewController: BaseViewController {
                                           forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
     }
     
-    private func setMenuSliderView() {
-        mainView.menuSliderView.delegate = self
-        mainView.menuSliderView.dataSource = self
-        mainView.menuSliderView.register(HomeDetailTagCell.self,
-                                         forCellWithReuseIdentifier: HomeDetailTagCell.identifier)
-    }
-    
     private func setDisplayTableView() {
         mainView.displayTableView.delegate = self
         mainView.displayTableView.dataSource = self
@@ -106,7 +103,41 @@ class HomeDetailViewController: BaseViewController {
         mainView.displayTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
-    //MARK: - SETDATE
+    private func setButtons() {
+        mainView.leftButton.setTitle("암장 소개", for: .normal)
+        mainView.leftButton.addTarget(self, action: #selector(leftButtonClicked), for: .touchUpInside)
+        
+        mainView.rightButton.setTitle("섹터 소개", for: .normal)
+        mainView.rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func leftButtonClicked() {
+        buttonIsActive(mainView.leftButton)
+        buttonIsDeActive(mainView.rightButton)
+        
+        buttonChange = false
+        mainView.displayTableView.reloadData()
+    }
+    
+    @objc func rightButtonClicked() {
+        buttonIsActive(mainView.rightButton)
+        buttonIsDeActive(mainView.leftButton)
+        
+        buttonChange = true
+        mainView.displayTableView.reloadData()
+    }
+    
+    private func buttonIsActive(_ target: UIButton) {
+        target.backgroundColor = .customBlack
+        target.tintColor = .customWhite
+    }
+    
+    private func buttonIsDeActive(_ target: UIButton) {
+        target.backgroundColor = .customGray6
+        target.tintColor = .customGray2
+    }
+    
+    //MARK: - GetDate
     private func nowDate() -> String {
         let nowDate = Date()
         let dateFormatter = DateFormatter()
@@ -210,69 +241,41 @@ extension HomeDetailViewController: UICollectionViewDelegate {
 //MARK: - UICollectionViewDataSource
 extension HomeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == mainView.imageSliderView {
-            return viewModel.homeDetailNo.image.count * 3
-        } else {
-            return DetailMenuInformation.init().detailMenu.count
-        }
+        return viewModel.homeDetailNo.image.count * 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == mainView.imageSliderView {
-            let images = viewModel.homeDetailNo.image[indexPath.item % viewModel.homeDetailNo.image.count]
-            if let item = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailImageCell.identifier, for: indexPath) as? HomeDetailImageCell {
-                
-                item.image.backgroundColor = images
-                return item
-            }
-            return UICollectionViewCell()
-        } else {
-            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
+        let images = viewModel.homeDetailNo.image[indexPath.item % viewModel.homeDetailNo.image.count]
+        if let item = collectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailImageCell.identifier, for: indexPath) as? HomeDetailImageCell {
             
-            let list = DetailMenuInformation.init().detailMenu[indexPath.row]
-            item.layer.cornerRadius = 8
-            item.layer.borderWidth = 1
-            item.layer.borderColor = UIColor.customBlack?.cgColor
-            item.label.text = list.Title
-            item.backgroundColor = .customGray2
-            
+            item.image.backgroundColor = images
             return item
         }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) -> CGSize {
-        if collectionView == mainView.imageSliderView {
-            return CGSize(width: mainView.imageSliderView.frame.width, height: mainView.imageSliderView.frame.height)
-        } else {
-            return CGSize(width: 120, height: 60)
-        }
+        return CGSize(width: mainView.imageSliderView.frame.width, height: mainView.imageSliderView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == mainView.imageSliderView {
-            print(#function)
-        } else {
-            print(#function)
-        }
+        print(#function)
     }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
 extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == mainView.imageSliderView {
-            return CGSize(width: mainView.frame.width, height: 200)
-        } else {
-            return CGSize(width: 120, height: 60)
-        }
+        return CGSize(width: mainView.frame.width, height: 200)
     }
 }
 
-//MARK: -
+//MARK: - UITableViewDelegate
 extension HomeDetailViewController: UITableViewDelegate {
     
 }
 
+//MARK: - UITableViewDataSource
 extension HomeDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
