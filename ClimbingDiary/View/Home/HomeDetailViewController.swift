@@ -99,7 +99,7 @@ class HomeDetailViewController: BaseViewController {
     private func setDisplayTableView() {
         mainView.displayTableView.delegate = self
         mainView.displayTableView.dataSource = self
-        mainView.displayTableView.register(HomeDetailCell.self, forCellReuseIdentifier: HomeDetailCell.identifier)
+        mainView.displayTableView.register(DetailLeftCell.self, forCellReuseIdentifier: DetailLeftCell.identifier)
         mainView.displayTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
@@ -282,7 +282,7 @@ extension HomeDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeDetailCell.identifier, for: indexPath) as? HomeDetailCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailLeftCell.identifier, for: indexPath) as? DetailLeftCell else { return UITableViewCell() }
         
         cell.title.text = viewModel.homeDetailNo.name
         cell.subTitle.text = viewModel.homeDetailNo.introduceText
