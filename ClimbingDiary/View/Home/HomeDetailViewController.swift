@@ -14,9 +14,7 @@ class HomeDetailViewController: BaseViewController {
     var timer : Timer?
     var cuttentCellIndex = 0
     var progress: Progress?
-    
-    var buttonChange = false
-    
+        
     override func loadView() {
         self.view = mainView
     }
@@ -27,12 +25,10 @@ class HomeDetailViewController: BaseViewController {
         //슬라이드 기본 설정
         progressSet()
         activateTimer()
-        
         setImageSliderView()
-        setDisplayTableView()
         
-        //ButtonSet
-        
+        setButtons()
+        setLabels()
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,76 +92,24 @@ class HomeDetailViewController: BaseViewController {
                                           forCellWithReuseIdentifier: HomeDetailImageCell.identifier)
     }
     
-    private func setDisplayTableView() {
-        mainView.displayTableView.delegate = self
-        mainView.displayTableView.dataSource = self
-        mainView.displayTableView.register(DetailLeftCell.self, forCellReuseIdentifier: DetailLeftCell.identifier)
-        mainView.displayTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-    }
-    
     private func setButtons() {
-        mainView.leftButton.setTitle("암장 소개", for: .normal)
-        mainView.leftButton.addTarget(self, action: #selector(leftButtonClicked), for: .touchUpInside)
-        
-        mainView.rightButton.setTitle("섹터 소개", for: .normal)
-        mainView.rightButton.addTarget(self, action: #selector(rightButtonClicked), for: .touchUpInside)
+        mainView.mapButton.addTarget(self,
+                                     action: #selector(mapButtonClicked),
+                                     for: .touchUpInside)
+        mainView.callButton.addTarget(self,
+                                      action: #selector(callViewTapped),
+                                      for: .touchUpInside)
     }
     
-    @objc func leftButtonClicked() {
-        buttonIsActive(mainView.leftButton)
-        buttonIsDeActive(mainView.rightButton)
-        
-        buttonChange = false
-        mainView.displayTableView.reloadData()
+    private func setLabels() {
+        mainView.nameTextLabel.text = viewModel.homeDetailNo.name
+        mainView.nameSubTextLabel.text = viewModel.homeDetailNo.introduceText
     }
     
-    @objc func rightButtonClicked() {
-        buttonIsActive(mainView.rightButton)
-        buttonIsDeActive(mainView.leftButton)
-        
-        buttonChange = true
-        mainView.displayTableView.reloadData()
-    }
-    
-    private func buttonIsActive(_ target: UIButton) {
-        target.backgroundColor = .customBlack
-        target.tintColor = .customWhite
-    }
-    
-    private func buttonIsDeActive(_ target: UIButton) {
-        target.backgroundColor = .customGray6
-        target.tintColor = .customGray2
-    }
-    
-    //MARK: - GetDate
-    private func nowDate() -> String {
-        let nowDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko")
-        dateFormatter.dateFormat = "E요일"
-        let todayDate = dateFormatter.string(from: nowDate)
-        
-        return todayDate
-    }
-    
-    private func setOpeningHours() -> Int {
-        let nowDate = nowDate()
-        var index = 6
-        
-        if nowDate == "일요일" {
-            index = 0
-        } else if nowDate == "월요일 " {
-            index = 1
-        } else if nowDate == "화요일" {
-            index = 2
-        } else if nowDate == "수요일" {
-            index = 3
-        } else if nowDate == "목요일" {
-            index = 4
-        } else if nowDate == "금요일" {
-            index = 5
-        }
-        return index
+    @objc private func mapButtonClicked() {
+        let vc = HomeMapViewController()
+        vc.viewModel = viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - TIMER
@@ -268,35 +212,4 @@ extension HomeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: mainView.frame.width, height: 200)
     }
-}
-
-//MARK: - UITableViewDelegate
-extension HomeDetailViewController: UITableViewDelegate {
-    
-}
-
-//MARK: - UITableViewDataSource
-extension HomeDetailViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailLeftCell.identifier, for: indexPath) as? DetailLeftCell else { return UITableViewCell() }
-        
-        cell.title.text = viewModel.homeDetailNo.name
-        cell.subTitle.text = viewModel.homeDetailNo.introduceText
-        cell.backgroundColor = .customGray1
-        
-        cell.selectionStyle = .none
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return mainView.displayTableView.frame.height
-    }
-}
-
-final class gradeCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = String(describing: gradeCollectionViewCell.self)
 }

@@ -25,30 +25,11 @@ class AddEventViewControleer: BaseViewController {
         setDateLabel()
         setTitleLabel()
         setDateFormatter()
-        
-        setGradeCollectionViews()
-        setSectorCollectionViews()
     }
     
     private func setDateFormatter() {
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"
-    }
-    
-    private func setGradeCollectionViews() {
-        mainView.gradeInputCollectionView.delegate = self
-        mainView.gradeInputCollectionView.dataSource = self
-        
-        mainView.gradeOutputCollectionView.delegate = self
-        mainView.gradeOutputCollectionView.dataSource = self
-    }
-    
-    private func setSectorCollectionViews() {
-        mainView.sectorInputCollectionView.delegate = self
-        mainView.sectorInputCollectionView.dataSource = self
-        
-        mainView.sectorOutputCollectionView.delegate = self
-        mainView.sectorInputCollectionView.dataSource = self
     }
     
     //MARK: - Setup DateLaberl && DatePickerView
@@ -166,60 +147,6 @@ extension AddEventViewControleer: UIPickerViewDelegate, UIPickerViewDataSource {
             let filterData = viewModel.cragList.cragList.filter { $0.cityCode == viewModel.cityCode.value }
             mainView.inputTitleView.outputLabel.text = "\(filterData[row].name)"
             viewModel.targetCrag.value = filterData[row].idCode
-        }
-    }
-}
-
-//MARK: - UICollectionViewDelegate && DataSource
-extension AddEventViewControleer: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == mainView.gradeInputCollectionView {
-            if viewModel.targetCrag.value == 0 {
-                return 0
-            } else {
-                let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
-                return filterData[0].grade.count
-            }
-        } else if collectionView == mainView.gradeOutputCollectionView {
-            return viewModel.selectGrade.count
-        } else if collectionView == mainView.sectorInputCollectionView {
-            
-            return 0
-//            if viewModel.targetCrag.value.words.isEmpty {
-//                return 0
-//            } else {
-//                let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
-//                return filterData[0].numOfSector
-//            }
-        } else {
-            return viewModel.selectSector.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == mainView.gradeInputCollectionView {
-            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
-            
-            let filterData = viewModel.cragList.cragList.filter { $0.idCode == viewModel.targetCrag.value }
-            
-            item.backgroundColor = filterData[0].grade[indexPath.row]
-            
-            return item
-        } else if collectionView == mainView.gradeOutputCollectionView {
-            guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: gradeCollectionViewCell.reuseIdentifier, for: indexPath) as? gradeCollectionViewCell else { return UICollectionViewCell() }
-            item.backgroundColor = viewModel.selectGrade[indexPath.row]
-            
-            return item
-        } else if collectionView == mainView.sectorInputCollectionView {
-            guard let item = mainView.sectorInputCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
-            item.label.text = "섹터 테스트"
-            
-            return item
-        } else {
-            guard let item = mainView.sectorOutputCollectionView.dequeueReusableCell(withReuseIdentifier: HomeDetailTagCell.identifier, for: indexPath) as? HomeDetailTagCell else { return UICollectionViewCell() }
-            item.label.text = "테스트"
-            
-            return item
         }
     }
 }

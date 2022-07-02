@@ -52,8 +52,6 @@
 		753B21EA285E313900C922EF /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21E9285E313900C922EF /* CityInformation.swift */; };
 		753B21EE2861FE6F00C922EF /* DetailMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21ED2861FE6F00C922EF /* DetailMenu.swift */; };
 		753B21F02862003D00C922EF /* DetailMenuInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21EF2862003D00C922EF /* DetailMenuInformation.swift */; };
-		753B21F22862085A00C922EF /* DetailLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21F12862085A00C922EF /* DetailLeftCell.swift */; };
-		753B21F42864C08700C922EF /* DetailRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B21F32864C08700C922EF /* DetailRightCell.swift */; };
 		753C382E285517E400EEC8EF /* HomeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382D285517E400EEC8EF /* HomeMapView.swift */; };
 		753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753C382F285517ED00EEC8EF /* HomeMapViewController.swift */; };
 		755B40A42847143F0011B294 /* Crag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755B40A32847143F0011B294 /* Crag.swift */; };
@@ -98,6 +96,8 @@
 		75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C514E028467529008E74E3 /* HomeListViewController.swift */; };
 		75C514E328467532008E74E3 /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C514E228467532008E74E3 /* HomeListView.swift */; };
 		75C514E52846892C008E74E3 /* HomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C514E42846892C008E74E3 /* HomeListCell.swift */; };
+		75FC368A286C7BA3000B992A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC3689286C7BA3000B992A /* MenuViewController.swift */; };
+		75FC368C286C9A89000B992A /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC368B286C9A89000B992A /* MenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,8 +155,6 @@
 		753B21E9285E313900C922EF /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
 		753B21ED2861FE6F00C922EF /* DetailMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenu.swift; sourceTree = "<group>"; };
 		753B21EF2862003D00C922EF /* DetailMenuInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuInformation.swift; sourceTree = "<group>"; };
-		753B21F12862085A00C922EF /* DetailLeftCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLeftCell.swift; sourceTree = "<group>"; };
-		753B21F32864C08700C922EF /* DetailRightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRightCell.swift; sourceTree = "<group>"; };
 		753C382D285517E400EEC8EF /* HomeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapView.swift; sourceTree = "<group>"; };
 		753C382F285517ED00EEC8EF /* HomeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewController.swift; sourceTree = "<group>"; };
 		755B40A32847143F0011B294 /* Crag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crag.swift; sourceTree = "<group>"; };
@@ -195,6 +193,8 @@
 		75C514E028467529008E74E3 /* HomeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewController.swift; sourceTree = "<group>"; };
 		75C514E228467532008E74E3 /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
 		75C514E42846892C008E74E3 /* HomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListCell.swift; sourceTree = "<group>"; };
+		75FC3689286C7BA3000B992A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		75FC368B286C9A89000B992A /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +350,7 @@
 		75C51491284489DC008E74E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75FC3688286C7AE1000B992A /* Menu */,
 				75C514AD2844BC37008E74E3 /* OnBoard */,
 				75C514AE2844BC42008E74E3 /* Home */,
 				75C514AF2844BF94008E74E3 /* Schedule */,
@@ -402,8 +403,6 @@
 				75C514E228467532008E74E3 /* HomeListView.swift */,
 				755B40AD2848BE7C0011B294 /* HomeDetailViewController.swift */,
 				755B40AB2848BE710011B294 /* HomeDetailView.swift */,
-				753B21F12862085A00C922EF /* DetailLeftCell.swift */,
-				753B21F32864C08700C922EF /* DetailRightCell.swift */,
 				753C382F285517ED00EEC8EF /* HomeMapViewController.swift */,
 				753C382D285517E400EEC8EF /* HomeMapView.swift */,
 			);
@@ -460,6 +459,15 @@
 				755B40B7284A72170011B294 /* Enums.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		75FC3688286C7AE1000B992A /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				75FC3689286C7BA3000B992A /* MenuViewController.swift */,
+				75FC368B286C9A89000B992A /* MenuTableViewCell.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,7 +598,6 @@
 				755B40B8284A72170011B294 /* Enums.swift in Sources */,
 				75C5147B2844791E008E74E3 /* AppDelegate.swift in Sources */,
 				75C514E128467529008E74E3 /* HomeListViewController.swift in Sources */,
-				753B21F22862085A00C922EF /* DetailLeftCell.swift in Sources */,
 				753B21DE285C244800C922EF /* AddEventViewControleer.swift in Sources */,
 				753B21E4285CFB0C00C922EF /* ScheduleModel.swift in Sources */,
 				75C514DF28460286008E74E3 /* HomeImageView.swift in Sources */,
@@ -611,17 +618,18 @@
 				75C514DA2845B954008E74E3 /* UserDefaults.swift in Sources */,
 				755B40B4284914A70011B294 /* HomeDetailImageCell.swift in Sources */,
 				753B21E0285C244E00C922EF /* AddEventView.swift in Sources */,
+				75FC368A286C7BA3000B992A /* MenuViewController.swift in Sources */,
 				753B21E6285CFD9B00C922EF /* InputView.swift in Sources */,
 				753B21EA285E313900C922EF /* CityInformation.swift in Sources */,
 				755B40B6284914B20011B294 /* HomeDetailTagCell.swift in Sources */,
 				75C514B82844C84B008E74E3 /* ScheduleViewController.swift in Sources */,
+				75FC368C286C9A89000B992A /* MenuTableViewCell.swift in Sources */,
 				753B21EE2861FE6F00C922EF /* DetailMenu.swift in Sources */,
 				753C3830285517ED00EEC8EF /* HomeMapViewController.swift in Sources */,
 				75C514B62844C6CF008E74E3 /* HomeViewController.swift in Sources */,
 				75C514BF2844EC1C008E74E3 /* ViewRepresentable.swift in Sources */,
 				753B21E8285E303B00C922EF /* City.swift in Sources */,
 				755B40AA284762210011B294 /* Observable.swift in Sources */,
-				753B21F42864C08700C922EF /* DetailRightCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

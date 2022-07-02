@@ -45,6 +45,10 @@ class HomeMapViewController: BaseViewController {
                                                         for: .touchUpInside)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     //위치 추적 권한 요청
     private func requestAuthorization() {
         if locationManager == nil {
@@ -53,6 +57,7 @@ class HomeMapViewController: BaseViewController {
             locationManager.requestWhenInUseAuthorization()
             locationManager.delegate = self
             locationManagerDidChangeAuthorization(locationManager)
+            locationManager.startUpdatingLocation()
         } else {
             locationManager.startMonitoringSignificantLocationChanges()
         }

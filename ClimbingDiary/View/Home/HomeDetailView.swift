@@ -34,21 +34,36 @@ class HomeDetailView: UIView, ViewRepresentable {
         $0.distribution = .fillEqually
     }
     
-    let leftButton = UIButton().then {
+    let callButton = UIButton().then {
         $0.backgroundColor = .customBlack
         $0.tintColor = .customWhite
-        $0.setTitle("@@@@@@", for: .normal)
+        $0.setTitle("전화걸기", for: .normal)
         $0.layer.cornerRadius = 20
     }
     
-    let rightButton = UIButton().then {
+    let mapButton = UIButton().then {
         $0.backgroundColor = .customGray6
         $0.tintColor = .customGray2
-        $0.setTitle("@@@@@@", for: .normal)
+        $0.setTitle("위치확인", for: .normal)
         $0.layer.cornerRadius = 20
     }
     
-    let displayTableView = UITableView()
+    let resultView = UIView()
+    
+    let nameTextLabel = UILabel().then {
+        $0.text = "@@@@@@@@@"
+        $0.textColor = .customBlack
+        $0.font = UIFont.boldSystemFont(ofSize: 24)
+        $0.backgroundColor = .customGray1
+    }
+    
+    let nameSubTextLabel = UILabel().then {
+        $0.text = "@@@@@@@@"
+        $0.textColor = .customBlack
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.numberOfLines = 0
+        $0.backgroundColor = .customGray1
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,11 +80,12 @@ class HomeDetailView: UIView, ViewRepresentable {
         addSubview(progressView)
         
         addSubview(buttonStackView)
-        buttonStackView.addArrangedSubview(leftButton)
-        buttonStackView.addArrangedSubview(rightButton)
+        buttonStackView.addArrangedSubview(callButton)
+        buttonStackView.addArrangedSubview(mapButton)
         
-        addSubview(displayTableView)
-        
+        addSubview(resultView)
+        resultView.addSubview(nameTextLabel)
+        resultView.addSubview(nameSubTextLabel)
     }
     
     func setupConstraints() {
@@ -92,10 +108,22 @@ class HomeDetailView: UIView, ViewRepresentable {
             $0.height.equalTo(40)
         }
         
-        displayTableView.snp.makeConstraints {
+        resultView.snp.makeConstraints {
             $0.top.equalTo(buttonStackView.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview().inset(8)
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        nameTextLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(30)
+        }
+        
+        nameSubTextLabel.snp.makeConstraints {
+            $0.top.equalTo(nameTextLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(8)
+            $0.bottom.equalToSuperview().inset(10)
         }
     }
 }

@@ -40,3 +40,22 @@ enum mapType: Int {
     case staelite = 1 //위성형태
     case hybrid = 2 //하이브리드
 }
+
+enum MyItems: Equatable {
+    case collection([CollectionViewItem])
+}
+
+enum CollectionViewItem: Equatable {
+    case color(UIColor)
+    case text(String)
+    case subTitle(String)
+}
+
+enum MenuList: String {
+    case menu1 = "공지사항"
+    case menu2 = "오픈라이센스"
+    case menu3 = "문의하기"
+    case menu4 = "개인정보 처리방침"
+    case menu5 = "서비스 이용 약관"
+    case menu6 = "버전정보"
+}
